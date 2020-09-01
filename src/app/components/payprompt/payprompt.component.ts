@@ -5,26 +5,29 @@ import { FeedService } from 'src/app/services/FeedService';
 import { NativeService } from 'src/app/services/NativeService';
 
 declare let appManager: AppManagerPlugin.AppManager;
+
 @Component({
   selector: 'app-payprompt',
   templateUrl: './payprompt.component.html',
   styleUrls: ['./payprompt.component.scss'],
 })
 export class PaypromptComponent implements OnInit {
+
   public elaAddress:string ="";
-  public amount : number = 0;
+  public amount: number;
   public memo: string = "";
   public defalutMemo: string = "";
   public title: string = "";
   public disableMemo:boolean = false;
+
   constructor( 
-    private native:NativeService, 
-    private feedService:FeedService,
+    private native: NativeService, 
+    private feedService: FeedService,
     private navParams: NavParams,
     private popover: PopoverController,  
     public theme: ThemeService,
-    public  zone:NgZone) { 
-
+    public zone: NgZone
+  ) { 
   }
 
   ngOnInit() {

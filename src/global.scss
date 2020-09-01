@@ -61,7 +61,6 @@
   font-family: 'Montserrat' !important;
 }
 
-
 :root {
   ion-tab-button.tab-selected {
     ion-icon, ion-label {
@@ -100,8 +99,12 @@ ion-input {
   }
 }
 
-ion-header {
+/** Page filter when popup is showing **/
+.blur {
+  filter: blur(2.5px);
+}
 
+ion-header {
   ion-toolbar {
     margin-top: 20px;
 
@@ -233,7 +236,6 @@ ion-list {
   }
 }
 
-
 .genericPopup {
   .popover-wrapper{
     .popover-content {
@@ -277,4 +279,56 @@ pre {
 
 .loading-class{
   color:#000000;
+}
+
+.donatePopup {
+  --background: #f8f8ff;
+  animation: animate;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+
+  @keyframes animate {
+    0% { bottom: -1000px }
+    100% { bottom: 0px }
+  }
+
+  ion-backdrop {
+    background: transparent !important;
+  }
+
+  .popover-wrapper{
+    .popover-content {
+      position: relative !important;
+      margin: 0 auto !important;
+      left: auto !important;
+      top: auto !important;
+      width: 85vw !important;
+    }
+  }
+}
+
+.darkDonatePopup {
+  --background: #191a2f;
+  animation: animate;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+
+  @keyframes animate {
+    0% { bottom: -1000px }
+    100% { bottom: 0px }
+  }
+
+  ion-backdrop {
+    background: transparent !important;
+  }
+
+  .popover-wrapper{
+    .popover-content {
+      position: relative !important;
+      margin: 0 auto !important;
+      left: auto !important;
+      top: auto !important;
+      width: 85vw !important;
+    }
+  }
 }

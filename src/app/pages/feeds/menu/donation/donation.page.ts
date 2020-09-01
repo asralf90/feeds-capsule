@@ -65,12 +65,11 @@ export class DonationPage implements OnInit {
     this.showPayPrompt(this.elaAddress);
   }
 
-
   async showPayPrompt(elaAddress:string) {
     this.isShowPrompt = true;
     this.popover = await this.popoverController.create({
       mode: 'ios',
-      cssClass: 'genericPopup',
+      cssClass: !this.theme.darkMode ? 'donatePopup' : 'darkDonatePopup',
       component: PaypromptComponent,
       componentProps: {
         "title": this.translate.instant("DonationPage.donation"),
