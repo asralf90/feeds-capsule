@@ -36,14 +36,13 @@ export class ServerInfoPage implements OnInit {
   public clientNumber:number = 0;
   public nodeId:string = "";
 
-  public isBindServer: boolean = false ;
-  public didString: string ="";
-  public name: string ="";
-  public owner: string ="";
-  public introduction: string ="";
+  public isBindServer: boolean = false;
+  public didString: string = "";
+  public name: string = "";
+  public owner: string = "";
+  public introduction: string = "";
   public feedsUrl: string = null;
-  public  elaAddress: string = "";
-
+  public elaAddress: string = "";
   public serverDetails: any[] = [];
 
   constructor(
@@ -62,14 +61,14 @@ export class ServerInfoPage implements OnInit {
     this.acRoute.params.subscribe(data => {
       this.isOwner = data.isOwner || "";
       this.address = data.address || "";
-      if(data.nodeId != "0")
+      if(data.nodeId !== "0")
         this.nodeId = data.nodeId || "";
       this.initData();
     });
   }
 
   initData(){
-    if (this.address !== ''){
+    if (this.address !== '') {
       this.zone.run(() => {
         this.presentLoading();
       });
@@ -78,11 +77,12 @@ export class ServerInfoPage implements OnInit {
       let server: any ;
       let bindingServer = this.feedService.getBindingServer();
       
-      if (bindingServer !== null &&
+      if (
+        bindingServer !== null &&
         bindingServer !== undefined &&
-        this.nodeId == bindingServer.nodeId) {
+        this.nodeId === bindingServer.nodeId
+      ) {
         server = this.feedService.getServerbyNodeId(this.nodeId);
-
         this.isBindServer = true;
       } else {
         server = this.feedService.getServerbyNodeId(this.nodeId);
@@ -92,11 +92,9 @@ export class ServerInfoPage implements OnInit {
       this.serverStatus = this.feedService.getServerStatusFromId(this.nodeId);
       this.clientNumber = this.feedService.getServerStatisticsNumber(this.nodeId);
 
-      if (server == undefined){
+      if (server === undefined) {
         return ;
       }
-
-      this.collectServerData(server);
 
       this.didString = server.did;
       this.name = server.name ||  this.translate.instant('DIDdata.NotprovidedfromDIDDocument');
@@ -104,18 +102,19 @@ export class ServerInfoPage implements OnInit {
       this.introduction = server.introduction ||  this.translate.instant('DIDdata.NotprovidedfromDIDDocument');
       this.feedsUrl = server.feedsUrl || "";
       this.elaAddress = server.elaAddress || this.translate.instant('DIDdata.Notprovided');
+      this.collectServerData(server);
     }
   }
 
   ionViewWillEnter() {
     this.connectionStatus = this.feedService.getConnectionStatus();
-    this.events.subscribe('feeds:connectionChanged',(status)=>{
+    this.events.subscribe('feeds:connectionChanged', (status) => {
       this.zone.run(() => {
         this.connectionStatus = status;
       });
     });
 
-    this.events.subscribe("feeds:updateServerList",()=>{
+    this.events.subscribe("feeds:updateServerList", () => {
       this.zone.run(() => {
       this.native.navigateForward('/menu/servers',""); 
       });
@@ -123,7 +122,7 @@ export class ServerInfoPage implements OnInit {
   
     this.events.subscribe('feeds:serverConnectionChanged', serversStatus => {
       this.zone.run(() => {
-          if (this.address == ""){
+          if (this.address === ""){
             this.serverStatus = this.feedService.getServerStatusFromId(this.nodeId);
           }
       });
@@ -131,7 +130,7 @@ export class ServerInfoPage implements OnInit {
 
     this.events.subscribe('feeds:serverConnectionChanged', serversStatus => {
       this.zone.run(() => {
-          if (this.address == ""){
+          if (this.address === ""){
             this.serverStatus = this.feedService.getServerStatusFromId(this.nodeId);
           }
       });
@@ -144,12 +143,11 @@ export class ServerInfoPage implements OnInit {
       });
     });
 
-    this.events.subscribe("feeds:updateTitle",()=>{
+    this.events.subscribe("feeds:updateTitle", () => {
       this.initTitle();
     });
 
-    this.events.subscribe("feeds:removeFeedSourceFinish",()=>{
-      // this.initTitle();
+    this.events.subscribe("feeds:removeFeedSourceFinish", () => {
       this.native.hideLoading();
     });
   }
@@ -230,8 +228,8 @@ export class ServerInfoPage implements OnInit {
 
   resolveDid(){
     this.feedService.resolveDidDocument(this.address,null,
-      (server)=>{
-        this.zone.run(()=>{
+      (server) => {
+        this.zone.run(() => {
           this.buttonDisabled = false;
           this.name = server.name || this.translate.instant('DIDdata.NotprovidedfromDIDDocument');
           this.owner = server.owner;
@@ -239,8 +237,9 @@ export class ServerInfoPage implements OnInit {
           this.didString = server.did;
           this.carrierAddress = server.carrierAddress;
           this.feedsUrl = server.feedsUrl || "";
+          this.collectServerData(server);
         });
-      },(err)=>{
+      }, (err) => {
         this.native.toastWarn("ServerInfoPage.error");
         this.buttonDisabled = true;
         this.navigateBackPage();
@@ -249,18 +248,24 @@ export class ServerInfoPage implements OnInit {
   }
 
   addFeedSource() {
-    if(this.connectionStatus != 0){
+    if(this.connectionStatus !== 0){
       this.native.toastWarn('common.connectionError');
       return;
     }
 
-    this.feedService.addServer(this.carrierAddress,this.friendRequest,
-      this.name, this.owner, this.introduction,
-      this.didString, this.feedsUrl, ()=>{
-        this.native.navigateForward('/menu/servers',""); 
-      },(err)=>{
-        this.native.pop();
-      });
+    this.feedService.addServer(
+      this.carrierAddress,
+      this.friendRequest,
+      this.name,
+      this.owner,
+      this.introduction,
+      this.didString,
+      this.feedsUrl, 
+    () => {
+      this.native.navigateForward('/menu/servers',""); 
+    }, (err) => {
+      this.native.pop();
+    });
   }
 
   async deleteFeedSource(){
@@ -276,13 +281,13 @@ export class ServerInfoPage implements OnInit {
         icon: 'trash',
         handler: () => {
           this.native.showLoading('common.waitMoment');
-          this.feedService.deleteFeedSource(this.nodeId).then(()=>{
+          this.feedService.deleteFeedSource(this.nodeId).then(() => {
             this.native.toast("ServerInfoPage.removeserver"); 
             this.native.hideLoading();
             this.navigateBackPage();
           });
         }
-      },{
+      }, {
         text: this.translate.instant("ServerInfoPage.cancel"),
         icon: 'close',
         handler: () => {
@@ -294,7 +299,7 @@ export class ServerInfoPage implements OnInit {
   }
 
   async removeFeedSource(){
-    if(this.connectionStatus != 0){
+    if(this.connectionStatus !== 0){
       this.native.toastWarn('common.connectionError');
       return;
     }
@@ -306,7 +311,7 @@ export class ServerInfoPage implements OnInit {
         icon: 'trash',
         handler: () => {
           this.native.showLoading('common.waitMoment');
-          this.feedService.removeFeedSource(this.nodeId).then(()=>{
+          this.feedService.removeFeedSource(this.nodeId).then(() => {
             this.native.toast("ServerInfoPage.removeserver"); 
             this.native.hideLoading();
             this.navigateBackPage();
@@ -323,12 +328,12 @@ export class ServerInfoPage implements OnInit {
   }
 
   clickEdit(){
-    if(this.feedService.getConnectionStatus() != 0){
+    if(this.feedService.getConnectionStatus() !== 0){
       this.native.toastWarn('common.connectionError');
       return;
     }
 
-    if(this.feedService.getServerStatusFromId(this.nodeId) != 0){
+    if(this.feedService.getServerStatusFromId(this.nodeId) !== 0){
       this.native.toastWarn('common.connectionError');
       return;
     }
@@ -336,24 +341,24 @@ export class ServerInfoPage implements OnInit {
     this.native.go(
       "/editserverinfo", 
       { 
-        "address":this.address,
-        "name":this.name,
-        "introduction":this.introduction,
-        "elaAddress":this.elaAddress,
-        "nodeId":this.nodeId,
-        "did":this.didString,
+        "address": this.address,
+        "name": this.name,
+        "introduction": this.introduction,
+        "elaAddress": this.elaAddress,
+        "nodeId": this.nodeId,
+        "did": this.didString,
       }
     )
   }
 
   checkIsMine(){
     let bindingServer = this.feedService.getBindingServer();
-    if (bindingServer == null || bindingServer == undefined){
+    if (bindingServer === null || bindingServer === undefined) {
       return 1;
     }
     
-    let bindServerDid = bindingServer.did||'';
-    if (this.didString == bindServerDid)
+    let bindServerDid = bindingServer.did || '';
+    if (this.didString === bindServerDid)
       return 0;
 
     return 1;

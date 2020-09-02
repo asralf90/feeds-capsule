@@ -17,7 +17,8 @@
         <span class="users">{{'ServerInfoPage.users' | translate}}</span>
       </div>
     </div>
-     <ion-row *ngFor="let server of serverDetails" class="detail-row" [class.removeBorder]="serverDetails.indexOf(server) === serverDetails.length - 1">
+    <div *ngFor="let server of serverDetails">
+      <ion-row *ngIf="server.details" class="detail-row" [class.removeBorder]="serverDetails.indexOf(server) === serverDetails.length - 1">
         <ion-col size="12" class="left-col">
             <h1>{{ server.type.toUpperCase() }}</h1>
             <h2 *ngIf="!server.qrcode">{{ server.details }}</h2>
@@ -28,6 +29,7 @@
             </div>
         </ion-col>
       </ion-row>
+    </div>
     <!-- <ion-img [src]="!theme.darkMode ? './assets/images/edit.svg' : './assets/images/edit-dark.svg'"></ion-img> -->
   </ion-grid>
 </ion-content>
