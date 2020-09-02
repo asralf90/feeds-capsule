@@ -99,6 +99,12 @@ ion-input {
   }
 }
 
+/** Ripple for clickable items **/
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
 /** Page filter when popup is showing **/
 .blur {
   filter: blur(2.5px);
