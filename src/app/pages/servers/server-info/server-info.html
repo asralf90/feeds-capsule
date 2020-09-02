@@ -2,6 +2,33 @@
   <div class="offline-header"></div>
 </ion-header>
 <ion-content [class.darkContainer]="theme.darkMode" [class.lightContainer]="!theme.darkMode" class="ion-padding">
+<!-- 
+  <ion-grid class="container">
+    <div class="server-header">
+      <ion-img class="headerImg" src="./assets/images/profile-2.svg"></ion-img>
+      <h1>{{ name }}</h1>
+      <p>{{ introduction }}</p>
+ 
+      <div class="four" *ngIf="serverStatus === 0">
+        <span class="online-circle"></span>
+        <span class="online">{{'ServerInfoPage.online' | translate}}</span>
+        <ion-img  src="assets/images/users-online.svg" class="usersonline"></ion-img>
+        <span class="clientNumber">{{clientNumber}}</span>
+        <span class="users">{{'ServerInfoPage.users' | translate}}</span>
+      </div>
+
+      <div class="four" *ngIf="serverStatus === 1">
+        <span class="offline-circle"></span>
+        <span class="online offlinecolor">{{'ServerInfoPage.offline' | translate}}</span>
+        <ion-img  src="assets/images/users-offline.svg" class="usersonline"></ion-img>
+        <span class="clientNumber offlinecolor">{{clientNumber}}</span>
+        <span class="users offlinecolor">{{'ServerInfoPage.users' | translate}}</span>
+      </div>
+    </div>
+    <ion-img [src]="!theme.darkMode ? './assets/images/edit.svg' : './assets/images/edit-dark.svg'"></ion-img>
+  </ion-grid> -->
+
+
    <div class="edit" (click)="clickEdit()" *ngIf="address ==='' && checkIsMine() == 0">
        <ion-img src="./assets/images/edit.svg" *ngIf="!theme.darkMode"></ion-img>
        <ion-img src="./assets/images/edit-dark.svg" *ngIf="theme.darkMode"></ion-img>
@@ -17,7 +44,7 @@
    <div class="three white">
        {{introduction}}
    </div>
-   <!--online-->
+
    <div class="four" *ngIf="serverStatus == 0">
        <span class="online-circle"></span>
        <span class="online">{{'ServerInfoPage.online' | translate}}</span>
@@ -25,7 +52,7 @@
        <span class="clientNumber">{{clientNumber}}</span>
        <span class="users">{{'ServerInfoPage.users' | translate}}</span>
    </div>
-   <!-- offline-->
+
    <div class="four" *ngIf="serverStatus == 1">
     <span class="offline-circle"></span>
     <span class="online offlinecolor">{{'ServerInfoPage.offline' | translate}}</span>

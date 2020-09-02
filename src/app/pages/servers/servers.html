@@ -97,6 +97,7 @@
         </ion-row>
       </div>  
     </div>
+     <!-------------------- LABEL BUTTONS -------------------->
     <ion-row class="buttons-row">
       <ion-label (click)="exploreFeedSource()">{{ 'ServersPage.addNewFeedSources' | translate }}</ion-label>
       <ion-label *ngIf="myFeedSource === null" (click)="bindFeedSource()">{{ 'ServersPage.createNewFeedSource' | translate}}</ion-label>
