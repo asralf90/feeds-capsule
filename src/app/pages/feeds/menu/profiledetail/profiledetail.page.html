@@ -9,8 +9,8 @@
       <h1>{{ name }}</h1>
       <p>{{ description }}</p>
     </div>
-    <div *ngFor="let profile of profileDetails" >
-      <ion-row *ngIf="profile.details" class="detail-row">
+    <div *ngFor="let profile of profileDetails">
+      <ion-row *ngIf="profile.details" class="detail-row" [class.removeBorder]="profileDetails.indexOf(profile) === profileDetails.length - 1">
         <ion-col size="12" class="left-col">
             <h1>{{ profile.type.toUpperCase() }}</h1>
             <h2>{{ profile.details }}</h2>
@@ -21,7 +21,7 @@
       </ion-row>
     </div>
   </ion-grid>
-
+</ion-content>
 
 <!--   <div class="detail-div">
 
@@ -81,4 +81,3 @@
       </div> 
     </div>
   </div>  -->
-</ion-content>

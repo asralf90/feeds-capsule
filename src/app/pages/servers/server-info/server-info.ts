@@ -6,12 +6,15 @@ import { FeedService } from 'src/app/services/FeedService';
 import { ThemeService } from 'src/app/services/theme.service';
 import { ActionSheetController } from '@ionic/angular';
 import { TranslateService } from "@ngx-translate/core";
+
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
+
 class Attribute {
   constructor(
     public iconName: string,
     public attrName: string,
-    public attrValue: string) {}
+    public attrValue: string
+  ) {}
 }
 
 @Component({
@@ -21,16 +24,17 @@ class Attribute {
 })
 
 export class ServerInfoPage implements OnInit {
-  public  connectionStatus = 1;
-  public  buttonDisabled: boolean = true;
-  public  friendRequest = 'Feeds/0.1';
-  public  carrierAddress: string;
+
+  public connectionStatus = 1;
+  public buttonDisabled: boolean = true;
+  public friendRequest = 'Feeds/0.1';
+  public carrierAddress: string;
 
   public address: string = '';
-  public  isOwner: string = "false";
-  public  serverStatus:number = 1;
+  public isOwner: string = "false";
+  public serverStatus:number = 1;
   public clientNumber:number = 0;
-  public  nodeId:string = "";
+  public nodeId:string = "";
 
   public isBindServer: boolean = false ;
   public didString: string ="";
@@ -39,6 +43,9 @@ export class ServerInfoPage implements OnInit {
   public introduction: string ="";
   public feedsUrl: string = null;
   public  elaAddress: string = "";
+
+  public serverDetails: any[] = [];
+
   constructor(
     private actionSheetController:ActionSheetController,
     private events: Events,
@@ -48,35 +55,36 @@ export class ServerInfoPage implements OnInit {
     private acRoute: ActivatedRoute,
     private feedService: FeedService,
     public theme:ThemeService,
-    private translate:TranslateService) {}
+    private translate:TranslateService
+  ) {}
 
   ngOnInit() {
     this.acRoute.params.subscribe(data => {
       this.isOwner = data.isOwner || "";
       this.address = data.address || "";
       if(data.nodeId != "0")
-        this.nodeId = data.nodeId||"";
+        this.nodeId = data.nodeId || "";
       this.initData();
     });
   }
 
   initData(){
-    if (this.address != ''){
-      this.zone.run(()=>{
+    if (this.address !== ''){
+      this.zone.run(() => {
         this.presentLoading();
       });
       this.queryServer();
-    }else{
-      let server:any ;
+    } else {
+      let server: any ;
       let bindingServer = this.feedService.getBindingServer();
       
-      if (bindingServer != null &&
-        bindingServer !=undefined &&
-        this.nodeId == bindingServer.nodeId){
+      if (bindingServer !== null &&
+        bindingServer !== undefined &&
+        this.nodeId == bindingServer.nodeId) {
         server = this.feedService.getServerbyNodeId(this.nodeId);
 
         this.isBindServer = true;
-      }else{
+      } else {
         server = this.feedService.getServerbyNodeId(this.nodeId);
         this.isBindServer = false;
       }
@@ -87,6 +95,8 @@ export class ServerInfoPage implements OnInit {
       if (server == undefined){
         return ;
       }
+
+      this.collectServerData(server);
 
       this.didString = server.did;
       this.name = server.name ||  this.translate.instant('DIDdata.NotprovidedfromDIDDocument');
@@ -164,6 +174,36 @@ export class ServerInfoPage implements OnInit {
 
   navigateBackPage() {
     this.native.pop();
+  }
+
+  collectServerData(server) {
+    this.serverDetails = [];
+
+    this.serverDetails.push({
+      type: this.translate.instant('ServerInfoPage.name'),
+      details: server.name ||  this.translate.instant('DIDdata.NotprovidedfromDIDDocument')
+    });
+    this.serverDetails.push({
+      type: this.translate.instant('ServerInfoPage.owner'),
+      details: server.owner || ""
+    });
+    this.serverDetails.push({
+      type: this.translate.instant('ServerInfoPage.introduction'),
+      details: server.introduction || ""
+    });
+    this.serverDetails.push({
+      type: this.translate.instant('IssuecredentialPage.elaaddress'),
+      details: server.elaAddress || ""
+    });
+    this.serverDetails.push({
+      type: this.translate.instant('ServerInfoPage.did'),
+      details: server.did
+    }); 
+    this.serverDetails.push({
+      type: this.translate.instant('ServerInfoPage.feedsSourceQRCode'),
+      details: server.feedsUrl || "",
+      qrcode: true
+    });
   }
 
   async presentLoading() {
