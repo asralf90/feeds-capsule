@@ -13,6 +13,7 @@ declare let titleBarManager: TitleBarPlugin.TitleBarManager;
   styleUrls: ['./startbinding.page.scss'],
 })
 export class StartbindingPage implements OnInit {
+
   public connectionStatus = 1;
   public title = "02/06";
   public nonce = "";
@@ -20,6 +21,7 @@ export class StartbindingPage implements OnInit {
   public carrierAddress: string="";
   public did:string = "";
   public feedsUrl: string ="";
+
   // private isProcess = false;
   constructor(
     private zone: NgZone,
@@ -27,10 +29,9 @@ export class StartbindingPage implements OnInit {
     private events: Events,
     private acRoute: ActivatedRoute,
     private feedService:FeedService,
-    public  theme:ThemeService,
-    private translate:TranslateService) {
-  
-  
+    public theme:ThemeService,
+    public translate: TranslateService
+  ) {
   }
 
   ngOnInit() {
@@ -41,19 +42,18 @@ export class StartbindingPage implements OnInit {
       let did = data.did || "";
       this.feedsUrl = data.feedsUrl || "";
 
-      if (nonce!=""){
+      if (nonce !== "") {
         this.nonce = nonce ;
-      }else{
+      } else {
         this.nonce = this.feedService.generateNonce();
       }
       
-      if(did!=""){
+      if(did !== "") {
         this.did = did;
       }
 
       this.carrierAddress = data.address;
     });
-
   }
 
   ionViewWillEnter() {
@@ -79,9 +79,9 @@ export class StartbindingPage implements OnInit {
 
         case "credential_issued":
           this.zone.run(() => {
-              this.feedService.restoreBindingServerCache(this.did, nodeId, ()=>{
+              this.feedService.restoreBindingServerCache(this.did, nodeId, () => {
                 this.feedService.finishBinding(nodeId);
-              },()=>{  
+              }, () => {  
                 this.feedService.finishBinding(nodeId);
               });
           });

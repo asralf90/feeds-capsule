@@ -7,7 +7,7 @@
     <div class="server-header">
       <ion-img class="headerImg" src="./assets/images/profile-2.svg"></ion-img>
       <h1>{{ name }}</h1>
-      <p>{{ introduction }}</p>
+      <p *ngIf="introduction">{{ introduction }}</p>
       <div class="offline" [class.online]="serverStatus === 0">
         <span class="circle"></span>
         <span class="status" *ngIf="serverStatus === 0">{{ 'ServerInfoPage.online' | translate}}</span>

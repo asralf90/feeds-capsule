@@ -61,8 +61,11 @@ export class ServerInfoPage implements OnInit {
     this.acRoute.params.subscribe(data => {
       this.isOwner = data.isOwner || "";
       this.address = data.address || "";
-      if(data.nodeId !== "0")
+  
+      if (data.nodeId !== "0") {
         this.nodeId = data.nodeId || "";
+      }
+       
       this.initData();
     });
   }
@@ -74,7 +77,7 @@ export class ServerInfoPage implements OnInit {
       });
       this.queryServer();
     } else {
-      let server: any ;
+      let server: any;
       let bindingServer = this.feedService.getBindingServer();
       
       if (
@@ -99,7 +102,7 @@ export class ServerInfoPage implements OnInit {
       this.didString = server.did;
       this.name = server.name ||  this.translate.instant('DIDdata.NotprovidedfromDIDDocument');
       this.owner = server.owner;
-      this.introduction = server.introduction ||  this.translate.instant('DIDdata.NotprovidedfromDIDDocument');
+      this.introduction = server.introduction;
       this.feedsUrl = server.feedsUrl || "";
       this.elaAddress = server.elaAddress || this.translate.instant('DIDdata.Notprovided');
       this.collectServerData(server);
@@ -215,11 +218,12 @@ export class ServerInfoPage implements OnInit {
   }
 
   queryServer(){
-    if (this.address.length > 53&&
+    if (
+      this.address.length > 53 &&
       this.address.startsWith('feeds://') &&
       this.address.indexOf("did:elastos:")
     ) this.resolveDid();
-    else{
+    else {
       this.native.toastWarn("ServerInfoPage.Feedurlmaybeerror");
       this.navigateBackPage();
     }
@@ -227,13 +231,13 @@ export class ServerInfoPage implements OnInit {
 
 
   resolveDid(){
-    this.feedService.resolveDidDocument(this.address,null,
+    this.feedService.resolveDidDocument(this.address, null,
       (server) => {
         this.zone.run(() => {
           this.buttonDisabled = false;
           this.name = server.name || this.translate.instant('DIDdata.NotprovidedfromDIDDocument');
           this.owner = server.owner;
-          this.introduction = server.introduction || this.translate.instant('DIDdata.NotprovidedfromDIDDocument');
+          this.introduction = server.introduction;
           this.didString = server.did;
           this.carrierAddress = server.carrierAddress;
           this.feedsUrl = server.feedsUrl || "";

@@ -82,12 +82,17 @@ export class ScanqrcodePage implements OnInit {
       this.carrierAddress = result.carrierAddress;
       this.nonce = result.nonce;
       let did = result.did;
-      this.carrier.getIdFromAddress(this.carrierAddress, 
-        (userId)=>{
-            this.addFriends(this.carrierAddress, userId, this.nonce, did);
+      this.carrier.getIdFromAddress(
+        this.carrierAddress, 
+        (userId) => {
+          this.addFriends(
+            this.carrierAddress,
+            userId,
+            this.nonce,
+            did
+          ); 
         },
-        (err)=>{
-        });
+        (err) => {});
       }, (err: any) => {
           console.error(err);
       });
@@ -95,7 +100,7 @@ export class ScanqrcodePage implements OnInit {
 
   addFriends(address: string, nodeId: string, nonce: string, did: string){
     this.carrier.isValidAddress(address, (isValid:boolean) => {
-      if (!isValid){
+      if (!isValid) {
         let errMsg= this.translate.instant('common.addressinvalid')+": "+address;
         this.native.toast(errMsg);
         return;

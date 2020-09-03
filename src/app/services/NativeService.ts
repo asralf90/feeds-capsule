@@ -153,11 +153,10 @@ export class NativeService {
           return this.navCtrl;
       }
 
-      navigateForward(router:any, options:any):Promise<boolean>{ 
-          let option =options || ""; 
-          if(option!=""){
-           return this.navCtrl.navigateForward(router,options);
-          }else{
+      navigateForward(router: any, options?: any): Promise<boolean> { 
+          if (options) {
+           return this.navCtrl.navigateForward(router, options);
+          } else {
             return this.navCtrl.navigateForward(router);
           }
       }
