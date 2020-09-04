@@ -40,7 +40,7 @@ export class ServerInfoPage implements OnInit {
   public didString: string = "";
   public name: string = "";
   public owner: string = "";
-  public introduction: string = "";
+  public introduction: string = null;
   public feedsUrl: string = null;
   public elaAddress: string = "";
   public serverDetails: any[] = [];

@@ -16,6 +16,7 @@ declare let appManager: AppManagerPlugin.AppManager;
 })
 
 export class AddServerPage implements OnInit {
+
   public  connectionStatus = 1;
   public  address: string = '';
   
@@ -58,17 +59,19 @@ export class AddServerPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.initTitle();
+    this.native.setTitleBarBackKeyShown(true);
+
     this.connectionStatus = this.feedService.getConnectionStatus();
+
     this.events.subscribe("feeds:updateTitle",()=>{
       this.initTitle();
     });
-
     this.events.subscribe('feeds:connectionChanged',(status)=>{
       this.zone.run(() => {
         this.connectionStatus = status;
       });
     });
-
     this.events.subscribe('feeds:updateServerList', ()=>{
       this.zone.run(() => {
           //this.native.pop();
@@ -79,8 +82,6 @@ export class AddServerPage implements OnInit {
 
 
   ionViewDidEnter() {
-    this.initTitle();
-    this.native.setTitleBarBackKeyShown(true);
   }
 
   ionViewWillLeave(){
@@ -97,8 +98,6 @@ export class AddServerPage implements OnInit {
   navToBack() {
     this.native.pop();
   }
-
-
 
   scanCode(){
     appManager.sendIntent("scanqrcode", {}, {}, (res) => {

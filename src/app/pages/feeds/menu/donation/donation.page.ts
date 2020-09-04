@@ -33,13 +33,16 @@ export class DonationPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.initTitle();
+    this.native.setTitleBarBackKeyShown(true);
+  
     this.connectionStatus = this.feedService.getConnectionStatus();
+
     this.events.subscribe('feeds:connectionChanged',(status)=>{
       this.zone.run(() => {
         this.connectionStatus = status;
       });
     });
-
     this.events.subscribe("feeds:updateTitle",()=>{
       this.initTitle();
     });
@@ -47,8 +50,6 @@ export class DonationPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    this.initTitle();
-    this.native.setTitleBarBackKeyShown(true);
   }
 
   initTitle(){
@@ -69,7 +70,7 @@ export class DonationPage implements OnInit {
     this.isShowPrompt = true;
     this.popover = await this.popoverController.create({
       mode: 'ios',
-      cssClass: !this.theme.darkMode ? 'donatePopup' : 'darkDonatePopup',
+      cssClass: 'donatePopup',
       component: PaypromptComponent,
       componentProps: {
         "title": this.translate.instant("DonationPage.donation"),

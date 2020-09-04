@@ -30,22 +30,22 @@ export class AboutPage implements OnInit {
     }
 
     ionViewWillEnter() {
+      this.initTitle();
+      this.native.setTitleBarBackKeyShown(true);
+
       this.connectionStatus = this.feedService.getConnectionStatus();
+
       this.events.subscribe('feeds:connectionChanged',(status)=>{
         this.zone.run(() => {
           this.connectionStatus = status;
         });
       });
-
       this.events.subscribe("feeds:updateTitle",()=>{
         this.initTitle();
       });
-    
     }
 
     ionViewDidEnter(){
-      this.initTitle();
-      this.native.setTitleBarBackKeyShown(true);
     }
   
     initTitle(){
