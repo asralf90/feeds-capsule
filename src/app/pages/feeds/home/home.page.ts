@@ -9,6 +9,7 @@ import { UtilService } from 'src/app/services/utilService';
 import { TranslateService } from "@ngx-translate/core";
 import { NativeService } from 'src/app/services/NativeService';
 import { IonInfiniteScroll } from '@ionic/angular';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -21,6 +22,7 @@ export class HomePage implements OnInit {
   @ViewChild(IonInfiniteScroll,{static:true}) infiniteScroll: IonInfiniteScroll;
 
   myScrollContainer!: HTMLElement;
+
   public connectionStatus = 1;
   public postList: any = [];
   public nodeStatus:any={};

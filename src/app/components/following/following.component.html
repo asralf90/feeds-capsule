@@ -22,8 +22,7 @@
       </div>
 
       <div class="menu-div" style="margin-top: 10px;" (click)="menuMore(channel.nodeId, channel.id, channel.name)">
-        <img  src="./assets/images/dots-three-vertical.svg" *ngIf="!theme.darkMode" style="width:12.4;height:3px">
-        <img  src="./assets/images/dots-three-vertical-dark.svg" *ngIf="theme.darkMode" style="width:12.4;height:3px">
+        <img [src]="!theme.darkMode ? './assets/images/dots-three-vertical.svg' : './assets/images/dots-three-vertical-dark.svg'">
       </div>
 
       <div class="image-text-div" (click)="navTo(channel.nodeId, channel.id)">
@@ -37,11 +36,11 @@
 
           <div class="text-div">
             <div class="text1-div"> 
-              <ion-label class="channel-title-small white" (press)="pressName(channel.name)">{{moreName(channel.name)}}</ion-label>
+              <ion-label class="channel-title-small white" (press)="pressName(channel.name)">{{ moreName(channel.name) }}</ion-label>
             </div>
             <div >
               <img src="./assets/images/bubble2.svg" class="bubble">
-              <ion-label class="channel-follower2">{{channel.subscribers}} {{'common.followers'|translate}}</ion-label>
+              <ion-label class="channel-follower2"><span>{{ channel.subscribers }}</span> {{ 'common.followers'|translate }}</ion-label>
             </div>
           </div>
       </div>

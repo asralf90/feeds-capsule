@@ -21,12 +21,13 @@
   </div>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5">
-
     <ion-refresher-content
       class="refresh"
       pullingText="{{'common.pullToRefresh'|translate}}"
       pullingIcon="arrow-dropdown"
-      refreshingText="">
+      refreshingSpinner="crescent"
+      refreshingText="{{'common.Refreshing'|translate}}"
+    >
     </ion-refresher-content>
   </ion-refresher>
 

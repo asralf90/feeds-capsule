@@ -1,19 +1,3 @@
-<!-- <div *ngIf="channels.length == 0">
-  <div style="margin-top: 50px;" >
-    <div style="text-align: center; ">
-      <img src="./assets/images/empty-feeds-icon.svg">
-    </div>
-    <div class="all-empty" style="margin-top: 20px;">{{'common.allempty' | translate}}</div>
-    <div class="all-empty-content-text" style="margin-top: 7px;">{{'MyfeedsComponent.emptyDes' | translate}}</div>
-  
-    <div class="explore-feeds">
-    <ion-button expand="block"  mode="ios" (click)="createNewFeed()" >
-      <div class="explore-feeds-text">{{'MyfeedsComponent.createFeed' | translate}}</div>
-    </ion-button>
-    </div>
-  </div> 
-</div> -->
-
 <div *ngIf="channels.length === 0" class="empty-container">
   <img src="./assets/images/empty-feeds-icon.svg">
   <h1>{{ 'common.allempty' | translate }}</h1>
@@ -31,8 +15,7 @@
   <div class="image-text-layout-div" >
     <ion-card-content class="ion-no-padding ion-no-margin">
       <div class="menu-div" style="margin-top: 10px;" (click)="menuMore(channel.nodeId, channel.id, channel.name)">
-        <img  src="./assets/images/dots-three-vertical.svg" *ngIf="!theme.darkMode" style="width:12.4;height:3px">
-        <img  src="./assets/images/dots-three-vertical-dark.svg" *ngIf="theme.darkMode" style="width:12.4;height:3px">
+        <img [src]="!theme.darkMode ? './assets/images/dots-three-vertical.svg' : './assets/images/dots-three-vertical-dark.svg'">
       </div>
 
       <div class="image-text-div" (click)="navTo(channel.nodeId, channel.id)">
@@ -46,20 +29,55 @@
 
           <div class="text-div">
             <div class="text1-div"> 
-              <ion-label class="channel-title-small white" (press)="pressName(channel.name)">{{moreName(channel.name)}}</ion-label>
+              <ion-label class="channel-title-small white" (press)="pressName(channel.name)">{{ moreName(channel.name) }}</ion-label>
             </div>
             <div >
               <img src="./assets/images/bubble2.svg" class="bubble">
-              <ion-label class="channel-follower2">{{channel.subscribers}} {{'common.followers'|translate}}</ion-label>
+              <ion-label class="channel-follower2"><span>{{ channel.subscribers }}</span> {{ 'common.followers'|translate }}</ion-label>
             </div>
           </div>
       </div>
     </ion-card-content>
   </div> 
   <div class="line-div white-line"></div>
-
 </div>
 
 <div class="new-feed-div" *ngIf="channels.length > 0">
-    <div class="new-feed" (click)="createNewFeed()">{{'MyfeedsComponent.createNewFeed'|translate}}</div>
+    <div class="new-feed" (click)="createNewFeed()">{{ 'MyfeedsComponent.createNewFeed'|translate }}</div>
 </div>
+
+
+<!-- TEST WITH DUMMY DATA
+<div [class.darkContainer]="theme.darkMode">
+  <div class="image-text-layout-div" >
+    <ion-card-content class="ion-no-padding ion-no-margin">
+      <div class="menu-div" style="margin-top: 10px;">
+        <img [src]="!theme.darkMode ? './assets/images/dots-three-vertical.svg' : './assets/images/dots-three-vertical-dark.svg'">
+      </div>
+
+      <div class="image-text-div">
+          <ion-avatar class="avatar-div">
+            <div class="feed-source-card-status circlePosition">
+              <div class="offline-circle"></div>
+            </div>
+            <img src="./assets/images/empty-feeds-icon.svg">
+          </ion-avatar>
+
+          <div class="text-div">
+            <div class="text1-div"> 
+              <ion-label class="channel-title-small white">Feeds Name</ion-label>
+            </div>
+            <div >
+              <img src="./assets/images/bubble2.svg" class="bubble">
+              <ion-label class="channel-follower2"><span>2</span> {{ 'common.followers'|translate }}</ion-label>
+            </div>
+          </div>
+      </div>
+    </ion-card-content>
+  </div> 
+  <div class="line-div white-line"></div>
+</div>
+
+<div class="new-feed-div">
+    <div class="new-feed" (click)="createNewFeed()">{{ 'MyfeedsComponent.createNewFeed'|translate }}</div>
+</div> -->

@@ -934,8 +934,12 @@ ion-header {
   letter-spacing: normal;
   text-align: left;
   color: #a0a2c4;
-
   margin-left: 3.6px;
+
+  span {
+    font-size: 14px;
+    font-weight: 700;
+  }
 }
 
 .tab-text{
@@ -1517,12 +1521,18 @@ vertical-align: middle;
 }
 
 .image-text-layout-div{
-  margin-left: 10px; margin-top: 6px; margin-bottom: 10px; margin-right: 25px;
+  margin: 6px 25px 10px 10px;
 
   .menu-div{
-    //width:80px;
+    overflow: hidden;
     float: right;
+
+    img {
+      width: 18px;
+      height: 6px;
+    }
   }
+
   .image-text-div{
     display: flex; margin-top: 13px; margin-left: 13px; margin-right: 12px;
     .avatar-div{

@@ -11,51 +11,50 @@
   </ion-row>
 </div>
 
-  <div *ngFor="let post of likeList let i=index" [class.darkContainer]="theme.darkMode">
-    <div class="image-text-layout-div" >
-      <ion-card-content class="ion-no-padding ion-no-margin">
-        <div class="menu-div" (click)="menuMore(post.nodeId, post.channel_id)">
-          <img  src="./assets/images/dots-three-vertical.svg" *ngIf="!theme.darkMode" style="width:12.4;height:3px">
-          <img  src="./assets/images/dots-three-vertical-dark.svg" *ngIf="theme.darkMode" style="width:12.4;height:3px">
-        </div>
-        <div class="image-text-div" (click)="navTo(post.nodeId, post.channel_id)">
-            <ion-avatar class="avatar-div" style="position: relative;">
-              <div class="feed-source-card-status circlePosition">
-                <div class="online-circle"  *ngIf="nodeStatus[post.nodeId] == 0"></div>
-                <div class="offline-circle" *ngIf="nodeStatus[post.nodeId] == 1"></div>
-              </div>
-              <img  src={{parseAvatar(post.nodeId,post.channel_id)}}>
-            </ion-avatar>
-
-            <div class="text-div">
-              <div class="text1-div"> 
-                <ion-label class="channel-title-small white" (press)="pressName(post.nodeId, post.channel_id)">{{channelName(post.nodeId, post.channel_id)}}</ion-label>
-                <ion-label class="channel-ts"> {{handleDisplayTime(post.created_at)}}</ion-label>
-              </div>
-              <div  (click)="navTo(post.nodeId, post.channel_id)"> 
-                <ion-label class="channel-desc-small" (press)="pressOwerName(post.nodeId, post.channel_id)">@{{channelOwnerName(post.nodeId, post.channel_id)}}</ion-label>
-              </div>
+<div *ngFor="let post of likeList let i=index" [class.darkContainer]="theme.darkMode">
+  <div class="image-text-layout-div" >
+    <ion-card-content class="ion-no-padding ion-no-margin">
+      <div class="menu-div" (click)="menuMore(post.nodeId, post.channel_id)">
+        <img [src]="!theme.darkMode ? './assets/images/dots-three-vertical.svg' : './assets/images/dots-three-vertical-dark.svg'">
+      </div>
+      <div class="image-text-div" (click)="navTo(post.nodeId, post.channel_id)">
+          <ion-avatar class="avatar-div" style="position: relative;">
+            <div class="feed-source-card-status circlePosition">
+              <div class="online-circle"  *ngIf="nodeStatus[post.nodeId] == 0"></div>
+              <div class="offline-circle" *ngIf="nodeStatus[post.nodeId] == 1"></div>
             </div>
-        </div>
-
-        <div style="margin-left: 81px;margin-top:-12px">
-          <div class="channel-post-div"  (click)="navToPostDetail(post.nodeId, post.channel_id, post.id)"> 
-            <ion-label class="channel-post white"><pre>{{getContentText(post.content)}}</pre></ion-label>
-          </div>
-
-          <ion-avatar  *ngIf="getImage(post.nodeId, post.channel_id, post.id) != 'none'" class="content-img-without-margin" (click)="navToPostDetail(post.nodeId, post.channel_id, post.id)" style="margin-top: 5px;">
-            <img src="{{getImage(post.nodeId, post.channel_id, post.id)}}">
+            <img src={{parseAvatar(post.nodeId,post.channel_id)}}>
           </ion-avatar>
-          
-          <div class="channel-post-heart-comment-div">
-            <img class="like" [ngClass]="{'like-s': checkMyLike(post.nodeId, post.channel_id, post.id)}" (click)="like(post.nodeId, post.channel_id, post.id)">
-            <ion-label class="like-text" [ngClass]="{'like-s-text': checkMyLike(post.nodeId, post.channel_id, post.id)}" (click)="like(post.nodeId, post.channel_id, post.id)">{{post.likes}}</ion-label>
 
-            <img src="./assets/images/bubble-line.svg" class="comment" (click)="showCommentPage(post.nodeId, post.channel_id, post.id)">
-            <ion-label class="comment-text"  (click)="showCommentPage($event, post.nodeId, post.channel_id, post.id)">{{post.comments}}</ion-label>
+          <div class="text-div">
+            <div class="text1-div"> 
+              <ion-label class="channel-title-small white" (press)="pressName(post.nodeId, post.channel_id)">{{channelName(post.nodeId, post.channel_id)}}</ion-label>
+              <ion-label class="channel-ts"> {{handleDisplayTime(post.created_at)}}</ion-label>
+            </div>
+            <div  (click)="navTo(post.nodeId, post.channel_id)"> 
+              <ion-label class="channel-desc-small" (press)="pressOwerName(post.nodeId, post.channel_id)">@{{channelOwnerName(post.nodeId, post.channel_id)}}</ion-label>
+            </div>
           </div>
+      </div>
+
+      <div style="margin-left: 81px;margin-top:-12px">
+        <div class="channel-post-div"  (click)="navToPostDetail(post.nodeId, post.channel_id, post.id)"> 
+          <ion-label class="channel-post white"><pre>{{getContentText(post.content)}}</pre></ion-label>
         </div>
-      </ion-card-content>
-    </div>
-    <div class="line-div white-line" *ngIf="i!=likeList.length-1"></div>
+
+        <ion-avatar  *ngIf="getImage(post.nodeId, post.channel_id, post.id) != 'none'" class="content-img-without-margin" (click)="navToPostDetail(post.nodeId, post.channel_id, post.id)" style="margin-top: 5px;">
+          <img src="{{getImage(post.nodeId, post.channel_id, post.id)}}">
+        </ion-avatar>
+        
+        <div class="channel-post-heart-comment-div">
+          <img class="like" [ngClass]="{'like-s': checkMyLike(post.nodeId, post.channel_id, post.id)}" (click)="like(post.nodeId, post.channel_id, post.id)">
+          <ion-label class="like-text" [ngClass]="{'like-s-text': checkMyLike(post.nodeId, post.channel_id, post.id)}" (click)="like(post.nodeId, post.channel_id, post.id)">{{post.likes}}</ion-label>
+
+          <img src="./assets/images/bubble-line.svg" class="comment" (click)="showCommentPage(post.nodeId, post.channel_id, post.id)">
+          <ion-label class="comment-text"  (click)="showCommentPage($event, post.nodeId, post.channel_id, post.id)">{{post.comments}}</ion-label>
+        </div>
+      </div>
+    </ion-card-content>
   </div>
+  <div class="line-div white-line" *ngIf="i!=likeList.length-1"></div>
+</div>

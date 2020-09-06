@@ -2,8 +2,8 @@ export const en = {
     "common":{
         "followers":"Followers",
         "allempty":"All Empty",
-        "pullToRefresh":"release to refresh",
-        "Refreshing":"Refreshing...",
+        "pullToRefresh":"Update Feeds",
+        "Refreshing":"Updating Feeds...",
         "cancel":"Cancel",
         "ok":"OK",
         "confirm":"Confirm",

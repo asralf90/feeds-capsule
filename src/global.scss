@@ -110,6 +110,12 @@ ion-input {
   filter: blur(2.5px);
 }
 
+/** Swipe notification **/
+.notification-swipe {
+  --background: transparent;
+  width: 100%;
+}
+
 ion-header {
   ion-toolbar {
     margin-top: 20px;
