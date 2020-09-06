@@ -33,8 +33,8 @@
       <div class="image-text-layout-div" >
         <ion-card-content class="ion-no-padding ion-no-margin">
           <div class="menu-div" (click)="menuMore(post.nodeId, post.channel_id)">
-              <img  src="./assets/images/dots-three-vertical.svg" *ngIf="!theme.darkMode" style="width:12.4;height:3px">
-              <img  src="./assets/images/dots-three-vertical-dark.svg" *ngIf="theme.darkMode" style="width:12.4;height:3px">
+            <img *ngIf="theme.darkMode" src="assets/images/dots-three-vertical-dark.svg">
+            <img *ngIf="!theme.darkMode" src="assets/images/dots-three-vertical.svg">
           </div>
           <div class="image-text-div" (click)="navTo(post.nodeId, post.channel_id)">
               <ion-avatar class="avatar-div">
@@ -48,9 +48,9 @@
               <div class="text-div">
                 <div class="text1-div"> 
                   <ion-label class="channel-title-small white" (press)="pressName(post.nodeId, post.channel_id)">{{getChannelName(post.nodeId, post.channel_id)}}</ion-label>
-                  <ion-label class="channel-ts"> {{handleDisplayTime(post.created_at)}}</ion-label>
+                  <ion-label class="channel-ts">- {{handleDisplayTime(post.created_at)}}</ion-label>
                 </div>
-                <div  (click)="navTo(post.nodeId, post.channel_id)"> 
+                <div (click)="navTo(post.nodeId, post.channel_id)"> 
                   <ion-label class="channel-desc-small">@{{getChannelOwnerName(post.nodeId, post.channel_id)}}</ion-label>
                 </div>
               </div>
@@ -63,7 +63,6 @@
             
             <ion-avatar  *ngIf="images[post.nodeId+post.channel_id+post.id] != 'none'" class="content-img-without-margin" (click)="navToPostDetail(post.nodeId, post.channel_id, post.id)">
               <img [src]="images[post.nodeId+post.channel_id+post.id]" style="margin-top: 2px;"> 
-              <!-- <img [scrollTarget]="scrollableDiv" [lazyLoad]="{{images[post.nodeId+post.channel_id+post.id]}}" style="margin-top: 2px;"/> -->
             </ion-avatar>
     
             
@@ -87,3 +86,77 @@
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>
+
+<!-- TEST UI WITH DUMMY DATA
+  ion-header *ngIf="connectionStatus == 1">
+    <div class="offline-header"></div>
+  </ion-header>
+  
+  <ion-content ion-padding>
+  
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5">
+      <ion-refresher-content
+        class="refresh"
+        pullingText="{{'common.pullToRefresh'|translate}}"
+        pullingIcon="arrow-dropdown"
+        refreshingSpinner="crescent"
+        refreshingText="{{'common.Refreshing'|translate}}"
+      >
+      </ion-refresher-content>
+    </ion-refresher>
+  
+      <div [class.darkContainer]="theme.darkMode" class="scroll-container" id="my-scroll-container">
+  
+        <div class="image-text-layout-div" >
+          <ion-card-content class="ion-no-padding ion-no-margin">
+            <div class="menu-div">
+              <img *ngIf="theme.darkMode" src="assets/images/dots-three-vertical-dark.svg">
+              <img *ngIf="!theme.darkMode" src="assets/images/dots-three-vertical.svg">
+            </div>
+            <div class="image-text-div">
+                <ion-avatar class="avatar-div">
+                  <div class="feed-source-card-status circlePosition">
+                    <div class="offline-circle"></div>
+                  </div>
+                  <img src="./assets/images/empty-feeds-icon.svg">
+                </ion-avatar>
+      
+                <div class="text-div">
+                  <div class="text1-div"> 
+                    <ion-label class="channel-title-small white">Feeds Name</ion-label>
+                    <ion-label class="channel-ts">- 5h</ion-label>
+                  </div>
+                  <ion-label class="channel-desc-small">@FeedsName</ion-label>
+                </div>
+            </div>
+      
+            <div style="margin-left: 81px;margin-top:-12px">
+              <div class="channel-post-div"> 
+                <ion-label class="channel-post white"><pre>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias architecto sunt nisi non harum rerum sed dignissimos quas sapiente fugit blanditiis quibusdam vel excepturi itaque, sint magni possimus id molestiae autem fuga alias mollitia dolorem similique velit. Nesciunt, ipsam corrupti.</pre></ion-label>
+              </div>
+              
+              <ion-avatar class="content-img-without-margin">
+                <img src="./assets/images/empty-feeds-icon.svg">
+              </ion-avatar>
+      
+              
+              <div class="channel-post-heart-comment-div">
+                <img class="like" [ngClass]="{'like-s': checkMyLike(post.nodeId, post.channel_id, post.id)}">
+                <ion-label class="like-text" [ngClass]="{'like-s-text': checkMyLike(post.nodeId, post.channel_id, post.id)}">5</ion-label>
+      
+                <img src="./assets/images/bubble-line.svg" class="comment">
+                <ion-label class="comment-text">10</ion-label>
+              </div>
+            </div>
+          </ion-card-content>
+        </div>
+        <div class="line-div white-line"></div>
+      </div>
+  
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="{{'common.loadingText'|translate}}">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+  </ion-content> -->

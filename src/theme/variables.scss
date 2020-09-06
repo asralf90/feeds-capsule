@@ -661,7 +661,6 @@ $segment-button-md-text-color: #007AFF !important;
 
 .channel-title-small{
   max-width: 150px;
-  height: 20px;
   font-family: Montserrat;
   font-size: 17px;
   font-weight: bold;
@@ -670,17 +669,16 @@ $segment-button-md-text-color: #007AFF !important;
   text-align: left;
   color: #161740;
   vertical-align: middle;
+  line-height: 0.1;
 }
 
 .channel-desc-small{
   width: 100%;
-  // height: 18px;
   font-family: Montserrat;
   font-size: 12px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.25;
   letter-spacing: normal;
   text-align: center;
   color: #a0a2c4;
@@ -689,15 +687,15 @@ $segment-button-md-text-color: #007AFF !important;
 .channel-ts{
   // display: inline-block;
   // width: 80px;
-  height: 14px;
   font-family: Montserrat;
   font-size: 11px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.27;
   letter-spacing: normal; 
   color: #a0a2c4;
+  position: relative;
+  top: 1.5px;
 
   margin-left: 5px;
   vertical-align: middle;
@@ -1032,8 +1030,6 @@ vertical-align: middle;
 
 
 .all-empty {
-  // width: 128px;
-  // height: 29px;
   font-family: Montserrat;
   font-size: 24px;
   font-weight: 500;
@@ -1082,8 +1078,6 @@ vertical-align: middle;
   color: #fdfeff;
 }
 
-
-
 .node-content {
   display: flex;
   align-items: center;
@@ -1101,7 +1095,6 @@ vertical-align: middle;
       margin: 0;
     }
 }
-
 
 .img-container {
   display: flex;
@@ -1126,7 +1119,6 @@ vertical-align: middle;
     padding: 0;
   }
 }
-
 
 .detail-div{
   width: calc( 100% - 64px );
