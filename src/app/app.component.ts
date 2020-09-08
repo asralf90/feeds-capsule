@@ -106,6 +106,7 @@ export class MyApp {
   }
 
   signout() {
+    this.feedService.cleanSignInData();
     this.native.setRootRouter(['/signin']);
   }
 

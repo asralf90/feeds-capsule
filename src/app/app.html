@@ -45,7 +45,8 @@
 
             <ion-menu-toggle>
                 <div (click)="signout()">
-                    <ion-icon mode="ios" name="log-out"></ion-icon>
+                    <ion-icon mode="ios" name="log-out" *ngIf="theme.darkMode"></ion-icon>
+                    <img src="./assets/icons/log-out.svg" *ngIf="!theme.darkMode">
                     <h1>Sign Out</h1>
                 </div>
             </ion-menu-toggle>

@@ -371,7 +371,9 @@ export class FeedIntro{
 }
 
 @Injectable()
+
 export class FeedService {
+
   public curtab:string ="home";
   public channelInfo:any ={};
   public postMap: any;
@@ -396,6 +398,7 @@ export class FeedService {
   private isDeclareFinish: boolean = false;
   private lastFeedUpdateMap:{[nodeId:string]: FeedUpdateTime};
   private lastCommentUpdateMap:{[nodeChannelPostId: string]: CommentUpdateTime};
+
   public constructor(
     private serializeDataService: SerializeDataService,
     private jwtMessageService: JWTMessageService,
