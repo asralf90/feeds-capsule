@@ -153,6 +153,7 @@ export class AppService {
     
       this.carrierService.init();
       this.native.setRootRouter(['/tabs/home']);
+      // this.native.setRootRouter(['/signin']);
       this.feedService.updateSignInDataExpTime(signInData);
     }
 

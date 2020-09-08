@@ -43,9 +43,7 @@ export class SigninPage implements OnInit {
   ionViewWillEnter() {
     this.event.subscribe("feeds:updateTitle",()=>{
       this.initTile();
-    });
-
- 
+    }); 
   }
 
   ionViewDidEnter(){
@@ -56,6 +54,10 @@ export class SigninPage implements OnInit {
 
   ionViewWillLeave(){
     this.event.unsubscribe("feeds:updateTitle");
+  }
+
+  learnMore(slide) {
+    slide.slideNext();
   }
 
   signIn(){

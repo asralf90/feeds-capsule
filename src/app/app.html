@@ -42,6 +42,13 @@
                     <h1>{{ 'app.donation' | translate }}</h1>
                 </div>
             </ion-menu-toggle>
+
+            <ion-menu-toggle>
+                <div (click)="signout()">
+                    <ion-icon mode="ios" name="log-out"></ion-icon>
+                    <h1>Sign Out</h1>
+                </div>
+            </ion-menu-toggle>
         </ion-content>
     </ion-menu>
 

@@ -110,6 +110,13 @@ ion-input {
   filter: blur(2.5px);
 }
 
+/** ion-slides pagination **/
+.swiper-pagination {
+  position: fixed;
+  bottom: 25px;
+  color: #ffffff;
+}
+
 /** Swipe notification **/
 .notification-swipe {
   --background: transparent;

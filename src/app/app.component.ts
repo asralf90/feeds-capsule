@@ -105,6 +105,10 @@ export class MyApp {
     this.native.navigateForward('/menu/donation',"");
   }
 
+  signout() {
+    this.native.setRootRouter(['/signin']);
+  }
+
   initProfileData(){
     this.feedService.initSignInDataAsync((signInData)=>{
       if (signInData == null || signInData == undefined)
