@@ -75,7 +75,7 @@
     padding: 60px 15px;
     border-radius: 17px;
     background: #ffffff;
-    box-shadow: none;
+    box-shadow: 0 3px 15px 0 #ededf0;
     margin: 0;
     width: 100%;
 
@@ -102,8 +102,23 @@
 }
 
 
-.darkContainer{
+.darkSlides {
   .white{
-   color:#ffffff;
+    color:#ffffff;
+  }
+
+  .onboard-slide {
+    .onboard-card {
+      box-shadow: 0 3px 15px 0 #151626;
+      background-color: #2e2f4e;
+  
+      ion-card-title {
+        color: #ffffff;
+      }
+    
+      ion-card-subtitle {
+        color: #ffffff;
+      }
+    }
   }
 }
