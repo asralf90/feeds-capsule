@@ -15,7 +15,8 @@ declare let titleBarManager: TitleBarPlugin.TitleBarManager;
   styleUrls: ['./signin.page.scss'],
 })
 export class SigninPage implements OnInit {
-  private fakedata:boolean = false;
+
+  private fakedata: boolean = false;
   public signedIn: boolean = false;
   public did: string = "";
   public userName: string = "";
@@ -61,7 +62,7 @@ export class SigninPage implements OnInit {
   }
 
   signIn(){
-    if (this.fakedata){
+    if (this.fakedata) {
       this.saveData(
         "did:elastos:iaP7GCmtcbf3Kiy7PX8zUVaWTzZQG3Kkka",
         "fakename",

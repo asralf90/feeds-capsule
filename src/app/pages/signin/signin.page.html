@@ -1,4 +1,4 @@
- <ion-content [class.darkContainer]="theme.darkMode">
+<!--  <ion-content [class.darkContainer]="theme.darkMode">
   <ion-grid>
     <ion-row>
       <ion-col size="12">
@@ -23,8 +23,9 @@
     </ion-row>
   </ion-grid> 
 </ion-content>
+ -->
 
-<!-- <ion-content [class.darkContainer]="theme.darkMode">
+<ion-content [class.darkContainer]="theme.darkMode">
     <ion-slides #slide pager="true">
       <ion-slide>
          <ion-grid>
@@ -56,6 +57,7 @@
       </ion-slide>
       <ion-slide class="onboard-slide">
         <ion-card class="onboard-card">
+          <img src='assets/onboard/slide1.svg'>
           <ion-card-title>
             What is feed?
           </ion-card-title>
@@ -65,7 +67,7 @@
              Join the conversation. <br>
           </ion-card-subtitle>
         </ion-card>
-        <ion-row class="btn-row">
+        <ion-row class="btn-row" (click)="signIn()">
           <ion-button>
             <ion-label>
                {{ "SigninPage.signIn"| translate }}
@@ -75,4 +77,4 @@
       </ion-slide>
     </ion-slides>
      
- </ion-content> -->
+ </ion-content>
