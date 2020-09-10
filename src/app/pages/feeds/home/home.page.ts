@@ -37,11 +37,11 @@ export class HomePage implements OnInit {
     private tabs: IonTabs,
     private events: Events,
     private zone: NgZone,
-    private feedService :FeedService,
-    public theme:ThemeService,
-    private translate:TranslateService,
-    private native:NativeService,
-    private menuService: MenuService
+    private feedService: FeedService,
+    public theme: ThemeService,
+    private translate: TranslateService,
+    private native: NativeService,
+    public menuService: MenuService
   ) {}
 
   ionViewWillEnter() {

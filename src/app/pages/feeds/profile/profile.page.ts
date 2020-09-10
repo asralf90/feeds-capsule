@@ -3,6 +3,7 @@ import { Events } from '@ionic/angular';
 import { FeedService, Avatar } from 'src/app/services/FeedService';
 import { ThemeService } from 'src/app/services/theme.service';
 import { IonInfiniteScroll} from '@ionic/angular';
+import { MenuService } from 'src/app/services/MenuService';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -36,6 +37,7 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private feedService: FeedService,
+    public menuService: MenuService,
     public theme:ThemeService,
     private events: Events,
     private zone: NgZone

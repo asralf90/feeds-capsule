@@ -40,7 +40,7 @@
           <p><span>{{ channel.subscribers }}</span> {{ 'common.followers' | translate }}</p>
         </ion-row>
       </ion-col>
-      <ion-col size="1.5" class="right-col" (click)="menuMore(channel.nodeId, channel.id, channel.name)">
+      <ion-col size="1.5" class="right-col" (click)="menuService.showOptions(channel.nodeId, channel.id)">
         <img [src]="!theme.darkMode ? './assets/images/dots-three-vertical.svg' : './assets/images/dots-three-vertical-dark.svg'">
       </ion-col>
       <ion-ripple-effect></ion-ripple-effect>

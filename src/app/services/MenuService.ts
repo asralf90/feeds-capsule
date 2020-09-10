@@ -7,6 +7,11 @@ import { NativeService } from './NativeService';
 
 @Injectable()
 export class MenuService {
+
+    optionsOn = false;
+    nodeId: string = null;
+    channelId: number = null;
+
     constructor(
         private feedService: FeedService,
         private actionSheetController: ActionSheetController,
@@ -15,8 +20,38 @@ export class MenuService {
     ) {
     }
 
-    async showChannelMenu(nodeId: string, channelId: number, channelName: string){
+    showOptions(nodeId: string, channelId: number) {
+        this.optionsOn = true;
+        this.nodeId = nodeId;
+        this.channelId = channelId;
+    }
+
+    hideOptions() {
+        this.optionsOn = false;
+        this.nodeId = null;
+        this.channelId = null;
+    }
+
+    shareChannel() {
+        this.native.toast("common.comingSoon");
+        this.optionsOn = false;
+    }
+
+    deleteChannel() {
+        if (this.feedService.getConnectionStatus() != 0) {
+            this.native.toastWarn('common.connectionError');
+        } else {
+            this.feedService.unsubscribeChannel(this.nodeId, this.channelId);
+        }
+    
+        this.optionsOn = false;
+        this.nodeId = null;
+        this.channelId = null;
+    }
+
+    async showChannelMenu(nodeId: string, channelId: number, channelName?: string){
         const actionSheet = await this.actionSheetController.create({
+            mode: 'ios',
             buttons: [
             {
                 text: this.translate.instant("common.share"),

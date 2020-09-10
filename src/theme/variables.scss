@@ -410,6 +410,8 @@ $segment-button-md-text-color: #007AFF !important;
         justify-content: flex-end;
 
         .avatar-container {
+          display: flex;
+          align-items: center;
           position: relative;
           border-radius: 50%;
     
@@ -467,7 +469,7 @@ $segment-button-md-text-color: #007AFF !important;
               margin: 0;
               font-size: 10px;
               font-weight: 600;
-              color: #a0a2c4;
+              color: #8888b0;
 
               span {
                 font-size: 13px;

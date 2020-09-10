@@ -107,7 +107,8 @@ export class SearchPage implements OnInit {
   }
 
   async unsubscribe(nodeId: string, name: string, id: number){
-    this.menuService.showUnsubscribeMenu(nodeId, id, name);
+    this.feedService.unsubscribeChannel(nodeId, id);
+    // this.menuService.showUnsubscribeMenu(nodeId, id, name);
   }
 
   getItems(events){

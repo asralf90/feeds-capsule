@@ -28,11 +28,11 @@
     </ion-refresher-content>
   </ion-refresher>
 
-    <div *ngFor="let post of postList let i=index" [class.darkContainer]="theme.darkMode" class="scroll-container" id="my-scroll-container">
+    <div *ngFor="let post of postList let i=index" [class.darkContainer]="theme.darkMode" [class.blur]="menuService.optionsOn" class="scroll-container" id="my-scroll-container">
 
       <div class="image-text-layout-div" >
         <ion-card-content class="ion-no-padding ion-no-margin">
-          <div class="menu-div" (click)="menuMore(post.nodeId, post.channel_id)">
+          <div class="menu-div" (click)="menuService.showOptions(post.nodeId, post.channel_id)">
             <img *ngIf="theme.darkMode" src="assets/images/dots-three-vertical-dark.svg">
             <img *ngIf="!theme.darkMode" src="assets/images/dots-three-vertical.svg">
           </div>
@@ -57,7 +57,7 @@
           </div>
     
           <div style="margin-left: 81px;margin-top:-12px">
-            <div class="channel-post-div" (click)="navToPostDetail(post.nodeId, post.channel_id, post.id)"> 
+            <div class="channel-post-div" (click)="!menuService.optionsOn ? navToPostDetail(post.nodeId, post.channel_id, post.id) : menuService.hideOptions()"> 
               <ion-label class="channel-post white"><pre>{{getContentText(post.content)}}</pre></ion-label>
             </div>
             
@@ -85,6 +85,30 @@
         loadingText="{{'common.loadingText'|translate}}">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
+
+  <ion-row class="global-options" [class.global-darkOptions]="theme.darkMode" *ngIf="menuService.optionsOn">
+    <div class="close ion-activatable ripple" (click)="menuService.hideOptions()">
+      <img *ngIf="!theme.darkMode" src="/assets/icons/cross.svg">
+      <img *ngIf="theme.darkMode" src="/assets/icons/darkmode/cross.svg">
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+    <ion-col size="4.5" class="left-col" (click)="menuService.shareChannel()">
+      <div class="option">
+        <ion-icon mode="ios" name="share"></ion-icon>
+        <span>Share</span> 
+      </div>
+    </ion-col>
+    <ion-col size="3" class="middle-col">
+      <div class="divider"></div>
+    </ion-col>
+    <ion-col size="4.5" class="right-col" (click)="menuService.deleteChannel()">
+      <div class="option">
+        <ion-icon mode="ios" name="trash"></ion-icon>
+        <span>Unfollow</span>
+      </div>
+    </ion-col>
+  </ion-row>
+
 </ion-content>
 
 <!-- TEST UI WITH DUMMY DATA

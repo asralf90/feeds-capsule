@@ -13,15 +13,17 @@ import { MenuService } from 'src/app/services/MenuService';
   styleUrls: ['./following.component.scss'],
 })
 export class FollowingComponent implements OnInit {
+
   @Input() followingList:any =[];
   @Input() nodeStatus:any = {};
+
   constructor(
     private feedspage: FeedsPage,
     private tabs: IonTabs,
     private feedService:FeedService,
     public theme:ThemeService,
     private native:NativeService,
-    private menuService: MenuService) { 
+    public menuService: MenuService) { 
 
   }
 
