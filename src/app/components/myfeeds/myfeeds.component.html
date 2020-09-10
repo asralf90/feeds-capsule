@@ -11,6 +11,47 @@
   </ion-row>
 </div>
 
+<ion-list *ngIf="channels.length > 0" class="channel-list" [class.darkChannelList]="theme.darkMode">
+  <ion-item
+    *ngFor="let channel of channels"
+    [class.removeBorder]="channel === channels[channels.length - 1]"
+    lines="none"
+  >
+    <ion-row class="channel-row ion-activatable ripple">
+      <ion-col
+        size="2.5"
+        class="left-col"
+        (click)="navTo(channel.nodeId, channel.id)"
+      >
+        <div class="avatar-container">
+          <img src={{parseAvatar(channel.avatar)}}>
+          <div class="offline" [class.online]="nodeStatus[channel.nodeId] === 0"></div>
+        </div>
+      </ion-col>
+      <ion-col
+        size="8"
+        class="middle-col"
+        (click)="navTo(channel.nodeId, channel.id)"
+        (press)="pressName(channel.name)"
+      >
+        <ion-label>{{ moreName(channel.name) }}</ion-label>
+        <ion-row>
+          <img src="./assets/images/bubble2.svg"> <br>
+          <p><span>{{ channel.subscribers }}</span> {{ 'common.followers' | translate }}</p>
+        </ion-row>
+      </ion-col>
+      <ion-col size="1.5" class="right-col" (click)="menuService.showOptions(channel.nodeId, channel.id)">
+        <img [src]="!theme.darkMode ? './assets/images/dots-three-vertical.svg' : './assets/images/dots-three-vertical-dark.svg'">
+      </ion-col>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-row>
+  </ion-item>
+
+  <div class="new-feed-div">
+    <div class="new-feed" (click)="createNewFeed()">{{ 'MyfeedsComponent.createNewFeed'|translate }}</div>
+  </div>
+</ion-list>
+<!-- 
 <div *ngFor="let channel of channels" [class.darkContainer]="theme.darkMode">
   <div class="image-text-layout-div" >
     <ion-card-content class="ion-no-padding ion-no-margin">
@@ -43,41 +84,5 @@
 </div>
 
 <div class="new-feed-div" *ngIf="channels.length > 0">
-    <div class="new-feed" (click)="createNewFeed()">{{ 'MyfeedsComponent.createNewFeed'|translate }}</div>
-</div>
-
-
-<!-- TEST WITH DUMMY DATA
-<div [class.darkContainer]="theme.darkMode">
-  <div class="image-text-layout-div" >
-    <ion-card-content class="ion-no-padding ion-no-margin">
-      <div class="menu-div" style="margin-top: 10px;">
-        <img [src]="!theme.darkMode ? './assets/images/dots-three-vertical.svg' : './assets/images/dots-three-vertical-dark.svg'">
-      </div>
-
-      <div class="image-text-div">
-          <ion-avatar class="avatar-div">
-            <div class="feed-source-card-status circlePosition">
-              <div class="offline-circle"></div>
-            </div>
-            <img src="./assets/images/empty-feeds-icon.svg">
-          </ion-avatar>
-
-          <div class="text-div">
-            <div class="text1-div"> 
-              <ion-label class="channel-title-small white">Feeds Name</ion-label>
-            </div>
-            <div >
-              <img src="./assets/images/bubble2.svg" class="bubble">
-              <ion-label class="channel-follower2"><span>2</span> {{ 'common.followers'|translate }}</ion-label>
-            </div>
-          </div>
-      </div>
-    </ion-card-content>
-  </div> 
-  <div class="line-div white-line"></div>
-</div>
-
-<div class="new-feed-div">
     <div class="new-feed" (click)="createNewFeed()">{{ 'MyfeedsComponent.createNewFeed'|translate }}</div>
 </div> -->

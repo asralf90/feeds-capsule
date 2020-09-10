@@ -21,8 +21,8 @@
     <ion-row class="channel-row ion-activatable ripple">
       <ion-col
         size="2.5"
-        (click)="navTo(channel.nodeId, channel.id)"
         class="left-col"
+        (click)="navTo(channel.nodeId, channel.id)"
       >
         <div class="avatar-container">
           <img src={{parseAvatar(channel.avatar)}}>
@@ -32,6 +32,7 @@
       <ion-col
         size="8"
         class="middle-col"
+        (click)="navTo(channel.nodeId, channel.id)"
         (press)="pressName(channel.name)"
       >
         <ion-label>{{ moreName(channel.name) }}</ion-label>

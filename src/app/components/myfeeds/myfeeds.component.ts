@@ -12,15 +12,17 @@ import { UtilService } from 'src/app/services/utilService';
   styleUrls: ['./myfeeds.component.scss'],
 })
 export class MyfeedsComponent implements OnInit {
+
   @Input() channels:any = [];
   @Input() nodeStatus:any = {};
+
   constructor(
     private feedService: FeedService,
     public theme:ThemeService,
     private native:NativeService,
-    private menuService: MenuService,
-    private translate:TranslateService) {
-    
+    public menuService: MenuService,
+    private translate:TranslateService
+  ) {
   }
 
   ngOnInit() {
