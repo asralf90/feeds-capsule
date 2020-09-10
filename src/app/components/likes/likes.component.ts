@@ -16,9 +16,11 @@ import { FeedsPage } from 'src/app/pages/feeds/feeds.page'
   styleUrls: ['./likes.component.scss'],
 })
 export class LikesComponent implements OnInit {
+
   private images = {};
   @Input() likeList:any =[];
   @Input() nodeStatus:any = {};
+
   constructor(
     private feedspage: FeedsPage,
     private tabs: IonTabs,
@@ -26,8 +28,8 @@ export class LikesComponent implements OnInit {
     public theme:ThemeService,
     private translate:TranslateService,
     private native:NativeService,
-    private menuService: MenuService) {
-     
+    public menuService: MenuService
+  ) {
   }
 
   ngOnInit() {

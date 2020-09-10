@@ -23,7 +23,7 @@
         class="left-col"
         (click)="navTo(channel.nodeId, channel.id)"
       >
-        <div class="avatar-container">
+        <div class="feedAvatar" [class.dark-feedAvatar]="theme.darkMode">
           <img src={{parseAvatar(channel.avatar)}}>
           <div class="offline" [class.online]="nodeStatus[channel.nodeId] === 0"></div>
         </div>
@@ -51,6 +51,7 @@
     <div class="new-feed" (click)="createNewFeed()">{{ 'MyfeedsComponent.createNewFeed'|translate }}</div>
   </div>
 </ion-list>
+
 <!-- 
 <div *ngFor="let channel of channels" [class.darkContainer]="theme.darkMode">
   <div class="image-text-layout-div" >

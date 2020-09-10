@@ -49,8 +49,8 @@ export class PostdetailPage implements OnInit {
     private feedService :FeedService,
     public theme:ThemeService,
     private translate:TranslateService,
-    private menuService: MenuService) {
-   
+    public menuService: MenuService
+  ) {
   }
 
   initData(){   
@@ -96,6 +96,8 @@ export class PostdetailPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.initTitle();
+    this.native.setTitleBarBackKeyShown(true);
     this.initData();
     this.connectionStatus = this.feedService.getConnectionStatus();
     this.feedService.refreshPostById(this.nodeId,this.channelId,this.postId);
@@ -108,16 +110,12 @@ export class PostdetailPage implements OnInit {
         this.connectionStatus = status;
       });
     });
-  
-
     this.events.subscribe('feeds:commentDataUpdate',()=>{
       this.zone.run(() => {
         this.startIndex = 0;
         this.initData();
       });
     });
-    
-  
     this.events.subscribe("feeds:friendConnectionChanged", (nodeId, status)=>{
       this.zone.run(()=>{
         this.nodeStatus[nodeId] = status;
@@ -148,8 +146,6 @@ export class PostdetailPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.initTitle();
-    this.native.setTitleBarBackKeyShown(true);
   }
 
  
@@ -244,7 +240,8 @@ export class PostdetailPage implements OnInit {
   }
 
   menuMore(){
-    this.menuService.showShareMenu(this.nodeId, Number(this.channelId), this.channelName);
+    this.menuService.showOptions(this.nodeId, this.channelId)
+    // this.menuService.showShareMenu(this.nodeId, Number(this.channelId), this.channelName);
   }
 
   showBigImage(content: any){

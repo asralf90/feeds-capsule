@@ -19,7 +19,9 @@ declare let titleBarManager: TitleBarPlugin.TitleBarManager;
   styleUrls: ['./channels.page.scss'],
 })
 export class ChannelsPage implements OnInit {
+
   @ViewChild(IonInfiniteScroll,{static:true}) infiniteScroll: IonInfiniteScroll;
+
   public images = {};
   public isShowPrompt: boolean = false;
   public popover:any;
@@ -40,6 +42,7 @@ export class ChannelsPage implements OnInit {
   public startIndex:number = 0;
   public pageNumber:number = 5;
   public totalData:any = [];
+
   constructor(
     private popoverController:PopoverController,
     private zone: NgZone,
@@ -49,9 +52,8 @@ export class ChannelsPage implements OnInit {
     private feedService: FeedService,
     public theme:ThemeService,
     private translate:TranslateService,
-    private menuService: MenuService) {
-
-   
+    public menuService: MenuService
+  ) {
   }
 
   subscribe(){
@@ -127,7 +129,10 @@ export class ChannelsPage implements OnInit {
 
   }
   ionViewWillEnter() {
+    this.initTitle();
+    this.native.setTitleBarBackKeyShown(true);
     this.init();
+
     this.events.subscribe('feeds:connectionChanged',(status)=>{
       this.zone.run(() => {
         this.connectionStatus = status;
@@ -160,8 +165,6 @@ export class ChannelsPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.initTitle();
-    this.native.setTitleBarBackKeyShown(true);
   }
 
   initTitle(){

@@ -30,7 +30,7 @@
         <ion-label  class="profile-subscribe">{{'common.followers' | translate}}</ion-label>
     </div> -->
 
-    <div class="tab-container">
+    <div class="tab-container" [class.removeMargin]="selectType === 'ProfilePage.myLikes'">
       <div class="left-tab" [class.tab-active]="selectType === 'ProfilePage.myFeeds'" (click)="changeType('ProfilePage.myFeeds')">
         <span>{{ 'ProfilePage.myFeeds' | translate }}</span>
       </div>
