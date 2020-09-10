@@ -1328,8 +1328,9 @@ vertical-align: middle;
 
 .profile-img {
   object-fit: cover;
+  overflow: hidden;
   border-radius: 50%;
-  border: 1.5px solid #6d74ef;
+  border: 1px solid #368bff;
 }
 
 .center-flex {

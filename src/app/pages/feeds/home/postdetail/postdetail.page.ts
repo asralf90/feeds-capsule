@@ -251,8 +251,6 @@ export class PostdetailPage implements OnInit {
     this.native.openViewer(this.getImage(),"common.image","PostdetailPage.postview");
   }
 
- 
-
   commentComment(){
     alert("TODO");
   }

@@ -32,7 +32,7 @@
               <div class="text-div">
                 <div class="text1-div"> 
                   <ion-label class="channel-title-small white" (press)="pressName()">{{channelName}}</ion-label>
-                  <ion-label class="post-detail-ts">{{handleDisplayTime(postTS)}}</ion-label>
+                  <ion-label class="post-detail-ts">- {{handleDisplayTime(postTS)}}</ion-label>
                 </div>
                 <div> 
                   <ion-label class="channel-desc-small">@{{channelOwner}}</ion-label>
@@ -73,7 +73,7 @@
             <div class="channel-detail-text-div">
               <div style="height: 100%; vertical-align: middle;" > 
                 <ion-label class="channel-title-small white">@{{indexText(comment.user_name)}}</ion-label>
-                <ion-label class="channel-ts">{{handleDisplayTime(comment.created_at)}}</ion-label>
+                <ion-label class="channel-ts">- {{handleDisplayTime(comment.created_at)}}</ion-label>
                 <ion-icon name="more" mode="ios" style="vertical-align: middle; float: right; "></ion-icon>
               </div>
     

@@ -123,9 +123,9 @@ ion-input {
   width: 100%;
 }
 
-/********** Global Edit/Delete Options **********/
+/********** Global Options **********/
 .global-options {
-  position: fixed;
+  position: sticky;
   z-index: 10;
   left: 5%;
   right: 5%;
@@ -211,7 +211,7 @@ ion-input {
   }
 }
 
-/********** Global Edit/Delete Dark Options **********/
+/********** Global Dark Options **********/
 .global-darkOptions {
   background-color: #2e2f4e;
   box-shadow: 0 3px 15px 0 #151626;

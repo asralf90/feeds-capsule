@@ -13,15 +13,17 @@ declare let titleBarManager: TitleBarPlugin.TitleBarManager;
   styleUrls: ['./comment.page.scss'],
 })
 export class CommentPage implements OnInit {
+
   public connectionStatus = 1;
-  public nodeStatus:any={};
+  public nodeStatus: any = {};
   public channelAvatar = "";
   public channelName = "";
-  public subscribers:string = "";
-  public newComment: string="";
+  public subscribers: string = "";
+  public newComment: string ="";
   public nodeId: string ="";
-  public channelId: number= 0;
+  public channelId: number = 0;
   public postId: number = 0;
+
   constructor(
     private events: Events,
     private native: NativeService,
@@ -30,7 +32,8 @@ export class CommentPage implements OnInit {
     private zone: NgZone,
     private feedService: FeedService,
     public theme:ThemeService,
-    private translate:TranslateService) { }
+    private translate:TranslateService
+  ) { }
 
   ngOnInit() {
     this.acRoute.params.subscribe((data)=>{
