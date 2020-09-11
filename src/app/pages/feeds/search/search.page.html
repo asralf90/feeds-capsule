@@ -51,6 +51,7 @@
         <ion-col
           size="6.5"
           class="middle-col"
+          (click)="navTo(channel.nodeId, channel.id)"
           (press)="pressName(channel.name)"
         >
           <ion-label>{{ moreName(channel.name) }}</ion-label>

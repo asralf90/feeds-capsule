@@ -60,24 +60,9 @@
         align-items: center;
         padding-left: 10px;
   
-        .img-container {
-          position: relative;
-  
-          img {
-            width: 56px;
-            height: 56px;
-            object-fit: contain;
-          }
-  
-          .indicator {
-            position: absolute;
-            z-index: 10;
-            top: 1.5px;
-            left: 1.5px;
-            background: #cdcde6;
-            height: 13px;
-            width: 13px;
-            border-radius: 100%;
+        .feedAvatar {
+          .offline {
+            border: 2px solid #ffffff;
           }
         }
       }
@@ -129,6 +114,10 @@
               font-weight: 500;  
             }
           }
+
+          .online {
+            color: #368bff;
+          }
         }
       }
       
@@ -169,11 +158,11 @@
       background-color: #2e2f4e;
   
       .left-col {
-        .img-container {
-          .indicator {
-            background: #cfd1f7;
+        .feedAvatar {
+          .offline {
+            border: 2px solid #2e2f4e;
           }
-        } 
+        }
       }
       
       .middle-col {  
@@ -195,11 +184,6 @@
     }
   }
 }
-
-.online {
-  color: #368bff;
-}
-
 
 
 // .div {

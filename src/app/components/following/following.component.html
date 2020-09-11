@@ -32,7 +32,7 @@
       <ion-col
         size="8"
         class="middle-col"
-        (click)="navTo(channel.nodeId, channel.id)"
+        (click)="!menuService.optionsOn ? navTo(channel.nodeId, channel.id) : menuService.hideOptions()"
         (press)="pressName(channel.name)"
       >
         <ion-label>{{ moreName(channel.name) }}</ion-label>

@@ -50,9 +50,9 @@
           (click)="navToServerInfo(server.nodeId, false)"
         >
           <ion-col size="2.75" class="left-col">
-            <div class="img-container">
+            <div class="feedAvatar">
               <img src="assets/images/profile-2.svg">
-              <div class="indicator" [class.online]="checkServerStatus(server.nodeId) === 0"></div>
+              <div class="offline" [class.online]="checkServerStatus(server.nodeId) === 0"></div>
             </div>
           </ion-col>
           <ion-col size="7.5" class="middle-col">
@@ -79,9 +79,9 @@
       <div *ngIf="showMyFeeds">
         <ion-row class="item-row ripple ion-activatable" (click)="navToServerInfo(myFeedSource.nodeId, true)">
           <ion-col size="2.75" class="left-col">
-            <div class="img-container">
+            <div class="feedAvatar">
               <img src="assets/images/profile-2.svg">
-              <div class="indicator" [class.online]="checkServerStatus(myFeedSource.nodeId) === 0"></div>
+              <div class="offline" [class.online]="checkServerStatus(myFeedSource.nodeId) === 0"></div>
             </div>
           </ion-col>
           <ion-col size="7.5" class="middle-col">

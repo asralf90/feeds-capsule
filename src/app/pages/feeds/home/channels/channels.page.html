@@ -15,13 +15,6 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <!-- EMPTY CONTAINER -->
-  <div *ngIf="postList.length === 0" class="empty-container">
-    <img src="./assets/images/empty-feeds-icon.svg">
-    <h1>{{ 'HomePage.allempty' | translate }}</h1>
-    <p>{{ 'common.nopostyet' | translate }}</p>
-  </div>
-
   <div *ngIf="checkChannelIsMine() == 0" class="edit" (click)="clickEdit()">
     <ion-img src="./assets/images/edit.svg" *ngIf="!theme.darkMode"></ion-img>
     <ion-img src="./assets/images/edit-dark.svg" *ngIf="theme.darkMode"></ion-img>
@@ -41,10 +34,10 @@
     <p>{{ channelDesc }}</p>
     <ion-row class="channel-btns-row">
       <ion-col size="3.5">
-        <ion-button *ngIf="followStatus" class="unsubscribed" fill="outline" (click)="subscribe()">
+        <ion-button *ngIf="!followStatus" class="unsubscribed" fill="outline" (click)="subscribe()">
           <ion-label>{{'SearchPage.follow' | translate}}</ion-label>
         </ion-button>
-        <ion-button *ngIf="!followStatus" class="subscribed" (click)="unsubscribe()">
+        <ion-button *ngIf="followStatus" class="subscribed" (click)="unsubscribe()">
           <ion-label>{{ 'SearchPage.following' | translate }}</ion-label>
         </ion-button>
       </ion-col>
@@ -55,6 +48,13 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <!-- EMPTY CONTAINER -->
+  <div *ngIf="postList.length === 0" class="empty-container">
+    <img src="./assets/images/empty-feeds-icon.svg">
+    <h1>{{ 'HomePage.allempty' | translate }}</h1>
+    <p>{{ 'common.nopostyet' | translate }}</p>
+  </div>
 
   <!-- POSTS -->
   <div *ngIf="postList.length > 0" [class.blur]="menuService.optionsOn">

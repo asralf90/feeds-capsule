@@ -14,6 +14,7 @@ import { ComponentsModule } from './components/components.module';
 
 import { TranslateLoader, TranslateModule,TranslateService} from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+
 import {zh} from './../assets/i18n/zh';
 import {en} from './../assets/i18n/en';
 import {fr} from './../assets/i18n/fr';
@@ -24,6 +25,7 @@ import { ContactPage } from './pages/contact/contact';
 import { HomePage } from './pages/home/home';
 import { TabsPage } from './pages/tabs/tabs';
 */
+
 import { NgxIonicImageViewerModule } from 'ngx-ionic-image-viewer';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -122,7 +124,7 @@ export function anim(AnimationC: Animation, baseEl: any, position?: any): Promis
     ServerlistComponentModule,
     SplashscreenPageModule,
     IonicModule.forRoot({
-      rippleEffect: false,
+      rippleEffect: true,
       mode: 'ios',
       navAnimation: anim,
     }),
