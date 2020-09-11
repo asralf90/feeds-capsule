@@ -19,6 +19,8 @@
           width: 20px;
           height: 20px;
           border-width: 3px;
+          top: 1px;
+          left: 1px;
         }
     }
 
@@ -78,7 +80,7 @@
               font-size: 9px !important;
               font-weight: 700;
               padding: 0;
-              overflow: hidden;
+              overflow: visible;
             }
         }
 
@@ -93,7 +95,7 @@
             --background-focused-opacity: none;
   
             ion-label {
-               --color:#8888b0;
+                color:#8888b0 !important;
             }
         }
 

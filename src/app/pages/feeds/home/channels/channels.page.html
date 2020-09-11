@@ -40,15 +40,15 @@
     </ion-row>
     <p>{{ channelDesc }}</p>
     <ion-row class="channel-btns-row">
-      <ion-col size="3">
-        <ion-button *ngIf="!followStatus" class="unsubscribed" fill="outline" (click)="subscribe()">
-          <ion-label >{{'SearchPage.follow' | translate}}</ion-label>
+      <ion-col size="3.5">
+        <ion-button *ngIf="followStatus" class="unsubscribed" fill="outline" (click)="subscribe()">
+          <ion-label>{{'SearchPage.follow' | translate}}</ion-label>
         </ion-button>
-        <ion-button *ngIf="followStatus" class="subscribed" (click)="unsubscribe()">
+        <ion-button *ngIf="!followStatus" class="subscribed" (click)="unsubscribe()">
           <ion-label>{{ 'SearchPage.following' | translate }}</ion-label>
         </ion-button>
       </ion-col>
-      <ion-col size="3">
+      <ion-col size="3.5">
         <ion-button class="tip" (click)="tip()">
           <ion-label>{{ 'ChannelsPage.tip' | translate }}</ion-label>
         </ion-button>
