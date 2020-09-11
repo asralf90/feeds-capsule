@@ -2,7 +2,21 @@
     min-height: 100%;
 }
 
-.darkContainer{
+.comment-grid {
+    .post-row {
+        .img-col {
+            .comment-avatar {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                border: 1.25px solid #368bff;
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+/* .darkContainer{
     .channel-detail-div .channel-detail-text-div .white{
         color: #ffffff;
     }
@@ -27,4 +41,4 @@
 
 .avatar-div{
     min-width: 56px; min-height: 56px; width: 56px; height: 56px;
-}
+} */
