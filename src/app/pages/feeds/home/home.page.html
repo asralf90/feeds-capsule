@@ -63,13 +63,15 @@
             (click)="!menuService.optionsOn ? navToPostDetail(post.nodeId, post.channel_id, post.id) : menuService.hideOptions()"
           > 
           <ion-row class="bottom-row">
-            <ion-col size="2.25">
-              <img [src]="checkMyLike(post.nodeId, post.channel_id, post.id) ? '/assets/images/like-s.svg' : '/assets/images/like.svg'" (click)="like(post.nodeId, post.channel_id, post.id)">
-              <ion-label [class.liked]="checkMyLike(post.nodeId, post.channel_id, post.id)" (click)="like(post.nodeId, post.channel_id, post.id)">{{ post.likes }}</ion-label>
+            <ion-col size="2.25" (click)="like(post.nodeId, post.channel_id, post.id)">
+              <img [src]="checkMyLike(post.nodeId, post.channel_id, post.id) ? '/assets/images/like-s.svg' : '/assets/images/like.svg'">
+              <ion-label [class.liked]="checkMyLike(post.nodeId, post.channel_id, post.id)">{{ post.likes }}</ion-label>
             </ion-col>
-            <ion-col>
-              <img [src]="post.comments ? '/assets/images/comment-s.svg' : '/assets/images/bubble-line.svg'" (click)="showCommentPage(post.nodeId, post.channel_id, post.id)">
-              <ion-label [class.commented]="post.comments" (click)="showCommentPage(post.nodeId, post.channel_id, post.id)">{{post.comments}}</ion-label>
+            <ion-col (click)="showCommentPage(post.nodeId, post.channel_id, post.id)">
+<!--               <img [src]="post.comments ? '/assets/images/comment-s.svg' : '/assets/images/bubble-line.svg'">
+              <ion-label [class.commented]="post.comments">{{post.comments}}</ion-label> -->
+              <img src="/assets/images/bubble-line.svg">
+              <ion-label>{{post.comments}}</ion-label>
             </ion-col>
           </ion-row>
         </ion-col>
