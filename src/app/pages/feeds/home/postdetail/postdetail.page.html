@@ -40,9 +40,11 @@
             >
           </ion-row>
           <p>@{{ channelOwner }}</p>
-          <h2 (click)="!menuService.optionsOn ? null : menuService.hideOptions()">{{ getContentText(postContent) }}</h2>
+          <h2 (click)="!menuService.optionsOn ? null : menuService.hideOptions()">
+            <pre>{{ getContentText(postContent) }}</pre>
+          </h2>
           <img 
-            *ngIf="getImage()"
+            *ngIf="getImage() !== 'none'"
             [src]="getImage()"
             class="post-img"
             (click)="!menuService.optionsOn ? null : menuService.hideOptions()"
@@ -76,7 +78,9 @@
               </ion-label>
             </ion-col>
           </ion-row>
-          <h2 (click)="!menuService.optionsOn ? null : menuService.hideOptions()">{{ comment.content }}</h2>
+          <h2 (click)="!menuService.optionsOn ? null : menuService.hideOptions()">
+            <pre>{{ comment.content }}</pre>
+          </h2>
           <ion-row class="bottom-row">
             <ion-col size="2.25">
               <img [src]="checkLikedComment(comment.id) ? '/assets/images/like-s.svg' : '/assets/images/like.svg'" (click)="likeComment(comment.id)">

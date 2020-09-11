@@ -53,9 +53,11 @@
             >
           </ion-row>
           <p>@{{ getChannelOwnerName(post.nodeId, post.channel_id) }}</p>
-          <h2 (click)="!menuService.optionsOn ? navToPostDetail(post.nodeId, post.channel_id, post.id) : menuService.hideOptions()">{{ getContentText(post.content) }}</h2>
+          <h2 (click)="!menuService.optionsOn ? navToPostDetail(post.nodeId, post.channel_id, post.id) : menuService.hideOptions()">
+            <pre >{{ getContentText(post.content) }}</pre>
+          </h2>
           <img 
-            *ngIf="images[post.nodeId+post.channel_id+post.id]"
+            *ngIf="images[post.nodeId+post.channel_id+post.id] !== 'none'"
             [src]="images[post.nodeId+post.channel_id+post.id]" 
             class="post-img"
             (click)="!menuService.optionsOn ? navToPostDetail(post.nodeId, post.channel_id, post.id) : menuService.hideOptions()"
