@@ -16,8 +16,7 @@ export class ProfileimagePage implements OnInit {
 
   public connectionStatus = 1;
 
-  public userAvatar: string = null;
-  public hasAvatar = false;
+  public uploadedAvatar: string = null;
 
   public select = 1;
   public selectedAvatar: string = null;
@@ -80,11 +79,11 @@ export class ProfileimagePage implements OnInit {
     this.select = this.feedService.getSelsectIndex();
     this.selectedAvatar = this.feedService.getProfileIamge() || 'assets/images/profile-1.svg';
       
+    // Check if an uploaded avatar exists. If so, select it and have it displayed
     if(this.selectedAvatar.indexOf("data:image") === -1) {;
-      this.hasAvatar = false;
+      this.uploadedAvatar = null;
     } else {
-      this.userAvatar = this.selectedAvatar;
-      this.hasAvatar = true;
+      this.uploadedAvatar = this.selectedAvatar;
     }
    
     this.connectionStatus = this.feedService.getConnectionStatus();
@@ -117,9 +116,9 @@ export class ProfileimagePage implements OnInit {
 
   selectIndex(index: number, avatar?: string){
     this.select = index;
-    if (index === 0){
-      this.openCamera(0);
-      return;
+    if (index === 0) {
+      // If uploaded avatar exists and is selected, use it. Otherwise open camera
+      avatar ? this.selectedAvatar = avatar : this.openCamera(0);
     } else {
       this.selectedAvatar = "img://"+avatar;
     }
@@ -127,9 +126,11 @@ export class ProfileimagePage implements OnInit {
 
   confirm(){
     if(!this.selectedAvatar) {
+      // Usually this is avoided by using a default avatar if one isn't selected
       this.native.toast_trans('common.noImageSelected');
       return false;
     } else {
+      // Set selected index and selected avatar
       this.feedService.setSelsectIndex(this.select);
       this.feedService.setProfileIamge(this.selectedAvatar);
       this.navCtrl.pop();
@@ -144,9 +145,8 @@ export class ProfileimagePage implements OnInit {
     this.camera.openCamera(30,0,type,
       (imageUrl) => {
         this.zone.run(() => {
-          this.userAvatar = imageUrl;
+          this.uploadedAvatar = imageUrl;
           this.selectedAvatar = imageUrl;
-          this.hasAvatar = true;
         });
       }, (err) => {
         this.native.toast_trans('common.noImageSelected');

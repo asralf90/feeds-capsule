@@ -24,12 +24,13 @@
           </ion-icon>
         </div>
       </ion-col>
-      <!-- HAS IMPORTED AVATAR -->
+      <!-- HAS UPLOADED AVATAR -->
       <ion-col 
-        *ngIf="userAvatar"
-        [ngStyle]="{ 'background-image': 'url(' + userAvatar + ')' }"
-        class="userAvatar"
+        *ngIf="uploadedAvatar"
+        [ngStyle]="{ 'background-image': 'url(' + uploadedAvatar + ')' }"
+        class="uploadedAvatar"
         size="2.5"
+        (click)="selectIndex(0, uploadedAvatar)"
       >
         <div 
           *ngIf="select === 0"
@@ -43,7 +44,7 @@
           </ion-icon>
         </div>
       </ion-col>
-      <!-- IMPORT AVATAR -->
+      <!-- UPLOAD AVATAR -->
       <ion-col 
         [ngStyle]="{ 'background-image': theme.darkMode ? 'url(/assets/images/profile-add-dark.svg)' : 'url(/assets/images/profile-add.svg)' }"
         size="2.5"
@@ -147,7 +148,7 @@
         
     <ion-col size="3">
       <ion-avatar class="profile-image">
-        <img src={{userAvatar}} (click)="selectIndex(0)" *ngIf="userAvatar">
+        <img src={{uploadedAvatar}} (click)="selectIndex(0)" *ngIf="uploadedAvatar">
       </ion-avatar>
       <div class="select-div" *ngIf="select == 0">
         <img src="assets/images/profile-select.svg">
