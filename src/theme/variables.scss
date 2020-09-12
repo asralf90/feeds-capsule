@@ -313,13 +313,9 @@ $segment-button-md-text-color: #007AFF !important;
 /********************** GLOBAL BUTTONS **********************/
 .btn-row {
   margin-top: 55px;
-  width: 100%;
+  width: 85%;
   display: flex;
   justify-content: center;
-
-  ion-button {
-    width: 95%;
-  }
 }
 
 .btns-row {

@@ -7,7 +7,7 @@
     <ion-searchbar placeholder="{{ 'SearchPage.searchFeeds' | translate }}" (ionInput)="getItems($event)" mode="ios"></ion-searchbar>
   </div>
 
-  <div *ngIf="channelList.length == 0" class="empty-container">
+  <div *ngIf="channelList.length === 0" class="empty-container">
     <img src="./assets/images/empty-feeds-icon.svg">
     <h1>{{ 'common.allempty' | translate }}</h1>
     <p>{{ 'SearchPage.emptyDes' | translate }}</p>

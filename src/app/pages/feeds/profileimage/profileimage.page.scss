@@ -1,6 +1,10 @@
 ion-grid {
     min-height: 100%;
     padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
   
     ion-row {
         width: 100%;
@@ -41,9 +45,10 @@ ion-grid {
             background-size: cover;
         }
     }
-  
+
     .btn-row {
-      margin-top: 25px;
+        margin-top: 25px;
+        width: 95%;
     }
 }
 
