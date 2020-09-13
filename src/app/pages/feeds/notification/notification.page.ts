@@ -48,7 +48,7 @@ export class NotificationPage {
   }
   ionViewWillEnter() {
     
-    this.connectionStatus = this.feedService.getConnectionStatus();
+  /*   this.connectionStatus = this.feedService.getConnectionStatus();
     this.events.subscribe('feeds:connectionChanged',(status)=>{
       this.zone.run(() => {
         this.connectionStatus = status;
@@ -56,7 +56,7 @@ export class NotificationPage {
     });
   
     this.initRefresh();
-    this.scrollToTop(1);
+    this.scrollToTop(1); */
   }
 
   initRefresh(){
