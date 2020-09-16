@@ -15,11 +15,6 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <div *ngIf="checkChannelIsMine() == 0" class="edit" (click)="clickEdit()">
-    <ion-img src="./assets/images/edit.svg" *ngIf="!theme.darkMode"></ion-img>
-    <ion-img src="./assets/images/edit-dark.svg" *ngIf="theme.darkMode"></ion-img>
-  </div> 
-
   <!-- CHANNEL HEADER -->
   <ion-grid class="channel-header">
     <div class="feedAvatar" [class.dark-feedAvatar]="theme.darkMode">
@@ -68,7 +63,7 @@
         </ion-col>
         <ion-col class="content-col" size="9.5">
           <ion-row class="top-row">
-            <ion-col class="left-col" size="11" (press)="pressName(post.nodeId, post.channel_id)">
+            <ion-col class="left-col" size="11" (press)="pressName(post.nodeId, post.channel_id)" (click)="!menuService.optionsOn ? navToPostDetail(post.nodeId, post.channel_id, post.id) : menuService.hideOptions()">
               <ion-label>
                 {{ getChannel(post.nodeId, post.channel_id) }}
                 <span>- {{ handleDisplayTime(post.created_at) }}</span>

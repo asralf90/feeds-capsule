@@ -49,6 +49,8 @@ export class AppService {
             } else {
               this.menu.open("menu");
             }
+          } else if (menuIcon.key === 'editChannel') {
+            this.event.publish("feeds:editChannel");
           }
         });
     }

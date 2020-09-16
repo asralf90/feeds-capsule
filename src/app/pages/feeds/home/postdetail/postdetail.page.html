@@ -47,7 +47,7 @@
             *ngIf="getImage() !== 'none'"
             [src]="getImage()"
             class="post-img"
-            (click)="!menuService.optionsOn ? null : menuService.hideOptions()"
+            (click)="!menuService.optionsOn ? showBigImage() : menuService.hideOptions()"
           > 
         </ion-col>
       </ion-row>

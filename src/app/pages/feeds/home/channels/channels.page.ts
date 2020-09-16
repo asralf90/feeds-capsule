@@ -10,7 +10,6 @@ import { TranslateService } from "@ngx-translate/core";
 import { PaypromptComponent } from 'src/app/components/payprompt/payprompt.component'
 import { PopoverController,IonInfiniteScroll} from '@ionic/angular';
 
-
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
@@ -93,7 +92,6 @@ export class ChannelsPage implements OnInit {
     this.initChannelData();
     this.initRefresh();
     this.initStatus(this.postList);
-  
   }
 
   initStatus(arr:any){
@@ -105,11 +103,11 @@ export class ChannelsPage implements OnInit {
 
   initRefresh(){
     this.totalData = this.feedService.getPostListFromChannel(this.nodeId, this.channelId) || [];
-    if(this.totalData.length-this.pageNumber > this.pageNumber){
+    if (this.totalData.length-this.pageNumber > this.pageNumber) {
       this.postList = this.totalData.slice(this.startIndex,this.pageNumber);
       this.startIndex++;
       this.infiniteScroll.disabled =false;
-    }else{
+    } else {
       this.postList = this.totalData.slice(0,this.totalData.length);
       this.infiniteScroll.disabled =true;
     }
@@ -126,8 +124,8 @@ export class ChannelsPage implements OnInit {
     this.channelDesc = channel.introduction;
     this.channelSubscribes = channel.subscribers;
     this.channelAvatar = this.feedService.parseChannelAvatar(channel.avatar);
-
   }
+
   ionViewWillEnter() {
     this.initTitle();
     this.native.setTitleBarBackKeyShown(true);
@@ -141,6 +139,10 @@ export class ChannelsPage implements OnInit {
 
     this.events.subscribe("feeds:updateTitle",()=>{
       this.initTitle();
+    });
+
+    this.events.subscribe("feeds:editChannel",()=>{
+      this.clickEdit()
     });
 
     this.events.subscribe('feeds:subscribeFinish', (nodeId, channelId, name)=> {
@@ -158,6 +160,8 @@ export class ChannelsPage implements OnInit {
   }
 
   ionViewWillLeave(){
+    titleBarManager.setIcon(TitleBarPlugin.TitleBarIconSlot.INNER_RIGHT, null);
+
     this.events.unsubscribe("feeds:connectionChanged");
     this.events.unsubscribe("feeds:updateTitle");
     this.events.unsubscribe("feeds:subscribeFinish");
@@ -169,6 +173,19 @@ export class ChannelsPage implements OnInit {
 
   initTitle(){
     titleBarManager.setTitle(this.translate.instant("ChannelsPage.feeds"));
+    this.checkChannelIsMine();
+  }
+
+  checkChannelIsMine(){
+    if (this.feedService.checkChannelIsMine(this.nodeId, this.channelId)) {
+      console.log('Channel is mine!');
+      titleBarManager.setIcon(TitleBarPlugin.TitleBarIconSlot.INNER_RIGHT, {
+        key: "editChannel",
+        iconPath: TitleBarPlugin.BuiltInIcon.EDIT
+      });
+    } else {
+      titleBarManager.setIcon(TitleBarPlugin.TitleBarIconSlot.INNER_RIGHT, null);
+    }
   }
 
   like(nodeId:string, channelId:number, postId:number){
@@ -284,9 +301,9 @@ export class ChannelsPage implements OnInit {
     return this.feedService.getServerStatusFromId(nodeId);
   }
 
-  initnodeStatus(nodeId:string){
-            let status = this.checkServerStatus(nodeId);
-            this.nodeStatus[nodeId] = status;
+  initnodeStatus(nodeId:string) {
+    let status = this.checkServerStatus(nodeId);
+    this.nodeStatus[nodeId] = status;
   }
   
   async showPayPrompt(elaAddress:string) {
@@ -321,7 +338,6 @@ export class ChannelsPage implements OnInit {
     }
     return this.images[nodeChannelPostId];
   }
-
 
   doRefresh(event:any){
     let sId =  setTimeout(() => {
@@ -388,13 +404,6 @@ export class ChannelsPage implements OnInit {
       });
    
     this.native.go("/eidtchannel");
-  }
-
-  checkChannelIsMine(){
-    if (this.feedService.checkChannelIsMine(this.nodeId, this.channelId))
-      return 0;
-    
-    return 1;
   }
 
   pressName(nodeId:string,channelId: number){
