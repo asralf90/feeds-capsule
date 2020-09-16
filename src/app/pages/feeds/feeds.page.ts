@@ -24,9 +24,9 @@ export class FeedsPage implements OnInit {
     private native: NativeService,
     private feedService: FeedService,
     private popoverController: PopoverController,
-    private translate:TranslateService,
-    public theme:ThemeService,
-    private event:Events
+    private translate: TranslateService,
+    public theme: ThemeService,
+    private event: Events
   ) {
   }
 
@@ -73,7 +73,7 @@ export class FeedsPage implements OnInit {
     appManager.setVisible("show");
   }
 
-  create(){
+  create(event){
     if(this.feedService.getConnectionStatus() != 0){
       this.native.toastWarn('common.connectionError');
       return;
@@ -85,8 +85,8 @@ export class FeedsPage implements OnInit {
       return ;
     }
       
-    if(this.feedService.getMyChannelList().length>0){
-      this.openPopOverComponent();
+    if(this.feedService.getMyChannelList().length > 0){
+      this.openPopOverComponent(event);
       return ;
     }
 
@@ -97,54 +97,54 @@ export class FeedsPage implements OnInit {
     this.native.navigateForward(['/createnewfeed'],"");
   }
 
-  async openPopOverComponent() {
+  async openPopOverComponent(ev: any) {
     this.popoverController.create(
       {
-        component:PostfromComponent,
-        // componentProps: {nodeId:this.nodeId,id:this.id},
-        cssClass: 'bottom-sheet-popover1',
-        showBackdrop:true,
-      }).then((popoverElement)=>{
+        component: PostfromComponent,
+        cssClass: !this.theme.darkMode ? 'PostfromComponent' : 'dark-PostfromComponent',
+        showBackdrop: true,
+        event: ev
+      }).then((popoverElement) => {
         popoverElement.present();
-      })
-    }
+      }
+    )
+  }
 
-    home(){
-      this.currentTab = "home";
-      // this.feedService.currentTab = "home";
-      this.title = "FeedsPage.tabTitle1";
-      this.initTile();
-      this.native.setTitleBarBackKeyShown(false);
-      this.feedService.setCurTab(this.currentTab);
-    }
+  home(){
+    this.currentTab = "home";
+    this.title = "FeedsPage.tabTitle1";
+    this.initTile();
+    this.native.setTitleBarBackKeyShown(false);
+    this.feedService.setCurTab(this.currentTab);
+  }
 
-    profile(){
-      this.currentTab = "profile";
-      this.title = "FeedsPage.tabTitle2"
-      this.initTile();
-      this.native.setTitleBarBackKeyShown(false);
-      this.feedService.setCurTab(this.currentTab);
-    }
+  profile(){
+    this.currentTab = "profile";
+    this.title = "FeedsPage.tabTitle2"
+    this.initTile();
+    this.native.setTitleBarBackKeyShown(false);
+    this.feedService.setCurTab(this.currentTab);
+  }
 
-    notification(){
-      this.currentTab = "notification";
-      this.title = "FeedsPage.tabTitle3";
-      this.initTile();
-      this.native.setTitleBarBackKeyShown(false);
-      this.feedService.setCurTab(this.currentTab);
-    }
+  notification(){
+    this.currentTab = "notification";
+    this.title = "FeedsPage.tabTitle3";
+    this.initTile();
+    this.native.setTitleBarBackKeyShown(false);
+    this.feedService.setCurTab(this.currentTab);
+  }
 
-    search(){
-      this.currentTab = "search";
-      this.feedService.refreshChannels();
-      this.title = "FeedsPage.tabTitle4";
-      this.initTile();
-      this.native.setTitleBarBackKeyShown(false);
-      this.feedService.setCurTab(this.currentTab);
-    }
+  search(){
+    this.currentTab = "search";
+    this.feedService.refreshChannels();
+    this.title = "FeedsPage.tabTitle4";
+    this.initTile();
+    this.native.setTitleBarBackKeyShown(false);
+    this.feedService.setCurTab(this.currentTab);
+  }
 
 
-    tabChanged(event){
-      this.currentTab = event.tab;
-    }
+  tabChanged(event){
+    this.currentTab = event.tab;
+  }
 }

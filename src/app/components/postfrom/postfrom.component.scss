@@ -1,6 +1,45 @@
+ion-grid {
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: solid 1px rgba(0, 0, 0, 0);
+
+    h1 {
+        margin: 0 30px 15px;
+        font-size: 17px;
+        font-weight: 500;
+        line-height: 1.56;
+        text-align: center;
+        padding: 0 0px 15px;
+        border-bottom: 1.75px solid #f0f1ff;
+    }
+}
+
+.darkContainer {
+    border: solid 1px rgba(0, 0, 0, 0);
+
+    h1 {
+        border-bottom: 1.75px solid #1e1f34;
+        color: #a0a2c4;
+    }
+     
+    .darkChannelList {
+        ion-item {
+            border-bottom: 1.5px solid #1e1f34;
+        }
+        
+        .removeBorder {
+            border-bottom: none;
+        }
+    }
+}
+
+/* 
 
 .list{
-    height:120px;
     overflow-x:hidden;
     overflow-y:auto;;
 }
@@ -81,5 +120,5 @@
 }
 }
 
-
+ */
 

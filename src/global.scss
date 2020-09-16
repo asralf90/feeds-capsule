@@ -333,6 +333,31 @@ pre {
   color:#000000;
 }
 
+/****************** Postfrom Component ******************/
+.PostfromComponent {
+  --background: #ffffff;
+  // --box-shadow: 0px 25px 35px 0 #5c5e7c;
+
+  .popover-wrapper{
+    .popover-content {
+      width: 85vw !important;
+    }
+  }
+}
+
+.dark-PostfromComponent {
+  --background: #2e2f4e;
+  --ion-backdrop-color:#000000;
+  // --box-shadow: 0px 25px 35px 0 #11132b;
+
+  .popover-wrapper{
+    .popover-content {
+      width: 85vw !important;
+    }
+  }
+}
+
+/****************** donate Component ******************/
 .donatePopup {
   animation: animate;
   animation-duration: 300ms;

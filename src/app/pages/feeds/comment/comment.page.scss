@@ -4,7 +4,8 @@
     ion-item {
         .channel-row {
             .left-col {
-                // justify-content: flex-start;
+                padding-left: 0;
+                justify-content: flex-end;
             }
         }
     }
@@ -16,7 +17,7 @@
         background-color: #f0f1ff;
         color: #161740;
         --padding-start: 10px;
-        font-family: SourceSansPro;
+        font-family: 'SourceSansPro';
         font-size: 14px;
         font-weight: 500;
         line-height: 1.25;
@@ -26,7 +27,7 @@
         ion-col {
             ion-button {
                 width: 100%;
-                height: 34px;
+                height: 36px;
                 --border-radius: 30px;
                 --box-shadow: none;
             
@@ -48,7 +49,7 @@
     }
 }
 
-.rightContent{
+/* .rightContent{
     position:absolute;
     left:100px;
     top:13px;
@@ -71,4 +72,4 @@
     --placeholder-color:#cfd1f7;
     --color:#cfd1f7;
 }
-}
+} */
