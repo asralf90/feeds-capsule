@@ -632,8 +632,16 @@ $segment-button-md-text-color: #007AFF !important;
         .left-col {
           ion-label {
             color: #ffffff;
+
+            span {
+              color: #cfd1f7;
+            }
           }
         }
+      }
+
+      p {
+        color: #cfd1f7;
       }
     }
   }
