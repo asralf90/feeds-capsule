@@ -136,7 +136,6 @@ export class HomePage implements OnInit {
   }
 
  ionViewWillLeave(){
-
     this.events.unsubscribe("feeds:connectionChanged");
     this.events.unsubscribe("feeds:postDataUpdate");
     this.events.unsubscribe("feeds:friendConnectionChanged");
