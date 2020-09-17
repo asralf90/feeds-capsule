@@ -3,10 +3,18 @@
 </ion-header>
 
 <ion-content>
-  <div class="search-container" [class.dark-search-container]="theme.darkMode">
-    <ion-searchbar placeholder="{{ 'SearchPage.searchFeeds' | translate }}" (ionInput)="getItems($event)" mode="ios"></ion-searchbar>
-  </div>
-
+  
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5">
+    <ion-refresher-content
+      class="refresh"
+      pullingText="{{'common.pullToRefresh'|translate}}"
+      pullingIcon="arrow-dropdown"
+      refreshingSpinner="crescent"
+      refreshingText="{{'common.Refreshing'|translate}}"
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+  
   <div *ngIf="channelList.length === 0" class="empty-container">
     <img src="./assets/images/empty-feeds-icon.svg">
     <h1>{{ 'common.allempty' | translate }}</h1>
@@ -20,18 +28,10 @@
     </ion-row>
   </div>
 
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5">
-    <ion-refresher-content
-      class="refresh"
-      pullingText="{{'common.pullToRefresh'|translate}}"
-      pullingIcon="arrow-dropdown"
-      refreshingSpinner="crescent"
-      refreshingText="{{'common.Refreshing'|translate}}"
-    >
-    </ion-refresher-content>
-  </ion-refresher>
-
   <ion-list *ngIf="channelList.length > 0" class="channel-list" [class.darkChannelList]="theme.darkMode">
+    <div class="search-container" [class.dark-search-container]="theme.darkMode">
+      <ion-searchbar placeholder="{{ 'SearchPage.searchFeeds' | translate }}" (ionInput)="getItems($event)" mode="ios"></ion-searchbar>
+    </div>
     <ion-item
       *ngFor="let channel of channelList let i=index"
       [class.removeBorder]="channel === channelList[channelList.length - 1]"
@@ -52,7 +52,6 @@
           size="6.5"
           class="middle-col"
           (click)="navTo(channel.nodeId, channel.id)"
-          (press)="pressName(channel.name)"
         >
           <ion-label>{{ moreName(channel.name) }}</ion-label>
           <ion-row>
@@ -71,7 +70,6 @@
         <ion-ripple-effect></ion-ripple-effect>
       </ion-row>
     </ion-item>
-
     <div class="new-feed-div" (click)="addfeedssource()" *ngIf="channelList.length > 0">
       <div class="new-feed">{{ "SearchPage.addfeedssource" | translate }}</div>
     </div> 
