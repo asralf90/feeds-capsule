@@ -1,6 +1,6 @@
 ion-grid {
     padding: 20px;
-    border-radius: 20px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -15,6 +15,31 @@ ion-grid {
         text-align: center;
         padding: 0 0px 15px;
         border-bottom: 1.75px solid #f0f1ff;
+    }
+
+    .channel-list {
+        overflow: hidden;
+        height: 70%;
+        overflow-x: hidden; 
+        overflow-y: auto; 
+    }
+
+    .arrow-down {
+        position: absolute;
+        z-index: 0;
+        bottom: -12px;
+        left: 46.2%;
+        height: 24px;
+        width: 24px;
+        transform: translate(2px, -2px) rotate(-45deg);
+        -webkit-transform: translate(2px, -2px) rotate(-45deg);
+        border-right: 2px solid transparent;
+        border-top: 2px solid transparent;
+        display: inline-block;
+        -moz-transform: translate(2px, -2px) rotate(-45deg);
+        -ms-transform: translate(2px, -2px) rotate(-45deg);
+        -o-transform: translate(2px, -2px) rotate(-45deg);
+        background-color: #ffffff;
     }
 }
 
@@ -34,6 +59,11 @@ ion-grid {
         .removeBorder {
             border-bottom: none;
         }
+    }
+
+
+    .arrow-down {
+        background-color: #2e2f4e;
     }
 }
 

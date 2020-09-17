@@ -103,7 +103,7 @@ export class FeedsPage implements OnInit {
         component: PostfromComponent,
         cssClass: !this.theme.darkMode ? 'PostfromComponent' : 'dark-PostfromComponent',
         showBackdrop: true,
-        event: ev
+        // event: ev
       }).then((popoverElement) => {
         popoverElement.present();
       }

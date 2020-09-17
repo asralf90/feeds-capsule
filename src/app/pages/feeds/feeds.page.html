@@ -10,8 +10,8 @@
       <img  class="profile-tab" [ngClass]="{'profile-tab-selected': currentTab == 'profile'}">
     </ion-tab-button>
 
-    <ion-tab-button>
-      <div class="add-tab" (click)="create($event)"></div>
+    <ion-tab-button (click)="create($event)">
+      <div class="add-tab"></div>
     </ion-tab-button>
 
     <ion-tab-button tab="notification" (click)="notification()">
