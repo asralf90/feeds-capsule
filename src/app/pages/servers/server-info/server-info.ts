@@ -6,12 +6,15 @@ import { FeedService } from 'src/app/services/FeedService';
 import { ThemeService } from 'src/app/services/theme.service';
 import { ActionSheetController } from '@ionic/angular';
 import { TranslateService } from "@ngx-translate/core";
+
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
+
 class Attribute {
   constructor(
     public iconName: string,
     public attrName: string,
-    public attrValue: string) {}
+    public attrValue: string
+  ) {}
 }
 
 @Component({
@@ -21,24 +24,27 @@ class Attribute {
 })
 
 export class ServerInfoPage implements OnInit {
-  public  connectionStatus = 1;
-  public  buttonDisabled: boolean = true;
-  public  friendRequest = 'Feeds/0.1';
-  public  carrierAddress: string;
+
+  public connectionStatus = 1;
+  public buttonDisabled: boolean = true;
+  public friendRequest = 'Feeds/0.1';
+  public carrierAddress: string;
 
   public address: string = '';
-  public  isOwner: string = "false";
-  public  serverStatus:number = 1;
+  public isOwner: string = "false";
+  public serverStatus:number = 1;
   public clientNumber:number = 0;
-  public  nodeId:string = "";
+  public nodeId:string = "";
 
-  public isBindServer: boolean = false ;
-  public didString: string ="";
-  public name: string ="";
-  public owner: string ="";
-  public introduction: string ="";
+  public isBindServer: boolean = false;
+  public didString: string = "";
+  public name: string = "";
+  public owner: string = "";
+  public introduction: string = null;
   public feedsUrl: string = null;
-  public  elaAddress: string = "";
+  public elaAddress: string = "";
+  public serverDetails: any[] = [];
+
   constructor(
     private actionSheetController:ActionSheetController,
     private events: Events,
@@ -48,35 +54,40 @@ export class ServerInfoPage implements OnInit {
     private acRoute: ActivatedRoute,
     private feedService: FeedService,
     public theme:ThemeService,
-    private translate:TranslateService) {}
+    private translate:TranslateService
+  ) {}
 
   ngOnInit() {
     this.acRoute.params.subscribe(data => {
       this.isOwner = data.isOwner || "";
       this.address = data.address || "";
-      if(data.nodeId != "0")
-        this.nodeId = data.nodeId||"";
+  
+      if (data.nodeId !== "0") {
+        this.nodeId = data.nodeId || "";
+      }
+       
       this.initData();
     });
   }
 
   initData(){
-    if (this.address != ''){
-      this.zone.run(()=>{
-        this.native.showLoading('common.waitMoment',2000);
+    if (this.address !== '') {
+      this.zone.run(() => {
+        this.presentLoading();
       });
       this.queryServer();
-    }else{
-      let server:any ;
+    } else {
+      let server: any;
       let bindingServer = this.feedService.getBindingServer();
       
-      if (bindingServer != null &&
-        bindingServer !=undefined &&
-        this.nodeId == bindingServer.nodeId){
+      if (
+        bindingServer !== null &&
+        bindingServer !== undefined &&
+        this.nodeId === bindingServer.nodeId
+      ) {
         server = this.feedService.getServerbyNodeId(this.nodeId);
-
         this.isBindServer = true;
-      }else{
+      } else {
         server = this.feedService.getServerbyNodeId(this.nodeId);
         this.isBindServer = false;
       }
@@ -84,28 +95,32 @@ export class ServerInfoPage implements OnInit {
       this.serverStatus = this.feedService.getServerStatusFromId(this.nodeId);
       this.clientNumber = this.feedService.getServerStatisticsNumber(this.nodeId);
 
-      if (server == undefined){
+      if (server === undefined) {
         return ;
       }
 
       this.didString = server.did;
       this.name = server.name ||  this.translate.instant('DIDdata.NotprovidedfromDIDDocument');
       this.owner = server.owner;
-      this.introduction = server.introduction ||  this.translate.instant('DIDdata.NotprovidedfromDIDDocument');
+      this.introduction = server.introduction;
       this.feedsUrl = server.feedsUrl || "";
       this.elaAddress = server.elaAddress || this.translate.instant('DIDdata.Notprovided');
+      this.collectServerData(server);
     }
   }
 
   ionViewWillEnter() {
+    this.initTitle();
+    this.native.setTitleBarBackKeyShown(true);
+    
     this.connectionStatus = this.feedService.getConnectionStatus();
-    this.events.subscribe('feeds:connectionChanged',(status)=>{
+    this.events.subscribe('feeds:connectionChanged', (status) => {
       this.zone.run(() => {
         this.connectionStatus = status;
       });
     });
 
-    this.events.subscribe("feeds:updateServerList",()=>{
+    this.events.subscribe("feeds:updateServerList", () => {
       this.zone.run(() => {
       this.native.navigateForward('/menu/servers',""); 
       });
@@ -113,7 +128,7 @@ export class ServerInfoPage implements OnInit {
   
     this.events.subscribe('feeds:serverConnectionChanged', serversStatus => {
       this.zone.run(() => {
-          if (this.address == ""){
+          if (this.address === ""){
             this.serverStatus = this.feedService.getServerStatusFromId(this.nodeId);
           }
       });
@@ -121,7 +136,7 @@ export class ServerInfoPage implements OnInit {
 
     this.events.subscribe('feeds:serverConnectionChanged', serversStatus => {
       this.zone.run(() => {
-          if (this.address == ""){
+          if (this.address === ""){
             this.serverStatus = this.feedService.getServerStatusFromId(this.nodeId);
           }
       });
@@ -134,19 +149,16 @@ export class ServerInfoPage implements OnInit {
       });
     });
 
-    this.events.subscribe("feeds:updateTitle",()=>{
+    this.events.subscribe("feeds:updateTitle", () => {
       this.initTitle();
     });
 
-    this.events.subscribe("feeds:removeFeedSourceFinish",()=>{
-      // this.initTitle();
+    this.events.subscribe("feeds:removeFeedSourceFinish", () => {
       this.native.hideLoading();
     });
   }
 
   ionViewDidEnter(){
-    this.initTitle();
-    this.native.setTitleBarBackKeyShown(true);
   }
 
   ionViewWillLeave(){
@@ -166,12 +178,53 @@ export class ServerInfoPage implements OnInit {
     this.native.pop();
   }
 
+  collectServerData(server) {
+    this.serverDetails = [];
+
+    this.serverDetails.push({
+      type: this.translate.instant('ServerInfoPage.name'),
+      details: server.name ||  this.translate.instant('DIDdata.NotprovidedfromDIDDocument')
+    });
+    this.serverDetails.push({
+      type: this.translate.instant('ServerInfoPage.owner'),
+      details: server.owner || ""
+    });
+    this.serverDetails.push({
+      type: this.translate.instant('ServerInfoPage.introduction'),
+      details: server.introduction || ""
+    });
+    this.serverDetails.push({
+      type: this.translate.instant('IssuecredentialPage.elaaddress'),
+      details: server.elaAddress || ""
+    });
+    this.serverDetails.push({
+      type: this.translate.instant('ServerInfoPage.did'),
+      details: server.did
+    }); 
+    this.serverDetails.push({
+      type: this.translate.instant('ServerInfoPage.feedsSourceQRCode'),
+      details: server.feedsUrl || "",
+      qrcode: true
+    });
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: this.translate.instant("ServerInfoPage.Pleasewait"),
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+  }
+
   queryServer(){
-    if (this.address.length > 53&&
+    if (
+      this.address.length > 53 &&
       this.address.startsWith('feeds://') &&
       this.address.indexOf("did:elastos:")
     ) this.resolveDid();
-    else{
+    else {
       this.native.toastWarn("ServerInfoPage.Feedurlmaybeerror");
       this.navigateBackPage();
     }
@@ -179,18 +232,19 @@ export class ServerInfoPage implements OnInit {
 
 
   resolveDid(){
-    this.feedService.resolveDidDocument(this.address,null,
-      (server)=>{
-        this.zone.run(()=>{
+    this.feedService.resolveDidDocument(this.address, null,
+      (server) => {
+        this.zone.run(() => {
           this.buttonDisabled = false;
           this.name = server.name || this.translate.instant('DIDdata.NotprovidedfromDIDDocument');
           this.owner = server.owner;
-          this.introduction = server.introduction || this.translate.instant('DIDdata.NotprovidedfromDIDDocument');
+          this.introduction = server.introduction;
           this.didString = server.did;
           this.carrierAddress = server.carrierAddress;
           this.feedsUrl = server.feedsUrl || "";
+          this.collectServerData(server);
         });
-      },(err)=>{
+      }, (err) => {
         this.native.toastWarn("ServerInfoPage.error");
         this.buttonDisabled = true;
         this.navigateBackPage();
@@ -199,18 +253,24 @@ export class ServerInfoPage implements OnInit {
   }
 
   addFeedSource() {
-    if(this.connectionStatus != 0){
+    if(this.connectionStatus !== 0){
       this.native.toastWarn('common.connectionError');
       return;
     }
 
-    this.feedService.addServer(this.carrierAddress,this.friendRequest,
-      this.name, this.owner, this.introduction,
-      this.didString, this.feedsUrl, ()=>{
-        this.native.navigateForward('/menu/servers',""); 
-      },(err)=>{
-        this.native.pop();
-      });
+    this.feedService.addServer(
+      this.carrierAddress,
+      this.friendRequest,
+      this.name,
+      this.owner,
+      this.introduction,
+      this.didString,
+      this.feedsUrl, 
+    () => {
+      this.native.navigateForward('/menu/servers',""); 
+    }, (err) => {
+      this.native.pop();
+    });
   }
 
   async deleteFeedSource(){
@@ -226,13 +286,13 @@ export class ServerInfoPage implements OnInit {
         icon: 'trash',
         handler: () => {
           this.native.showLoading('common.waitMoment');
-          this.feedService.deleteFeedSource(this.nodeId).then(()=>{
+          this.feedService.deleteFeedSource(this.nodeId).then(() => {
             this.native.toast("ServerInfoPage.removeserver"); 
             this.native.hideLoading();
             this.navigateBackPage();
           });
         }
-      },{
+      }, {
         text: this.translate.instant("ServerInfoPage.cancel"),
         icon: 'close',
         handler: () => {
@@ -244,7 +304,7 @@ export class ServerInfoPage implements OnInit {
   }
 
   async removeFeedSource(){
-    if(this.connectionStatus != 0){
+    if(this.connectionStatus !== 0){
       this.native.toastWarn('common.connectionError');
       return;
     }
@@ -256,7 +316,7 @@ export class ServerInfoPage implements OnInit {
         icon: 'trash',
         handler: () => {
           this.native.showLoading('common.waitMoment');
-          this.feedService.removeFeedSource(this.nodeId).then(()=>{
+          this.feedService.removeFeedSource(this.nodeId).then(() => {
             this.native.toast("ServerInfoPage.removeserver"); 
             this.native.hideLoading();
             this.navigateBackPage();
@@ -273,12 +333,12 @@ export class ServerInfoPage implements OnInit {
   }
 
   clickEdit(){
-    if(this.feedService.getConnectionStatus() != 0){
+    if(this.feedService.getConnectionStatus() !== 0){
       this.native.toastWarn('common.connectionError');
       return;
     }
 
-    if(this.feedService.getServerStatusFromId(this.nodeId) != 0){
+    if(this.feedService.getServerStatusFromId(this.nodeId) !== 0){
       this.native.toastWarn('common.connectionError');
       return;
     }
@@ -286,24 +346,24 @@ export class ServerInfoPage implements OnInit {
     this.native.go(
       "/editserverinfo", 
       { 
-        "address":this.address,
-        "name":this.name,
-        "introduction":this.introduction,
-        "elaAddress":this.elaAddress,
-        "nodeId":this.nodeId,
-        "did":this.didString,
+        "address": this.address,
+        "name": this.name,
+        "introduction": this.introduction,
+        "elaAddress": this.elaAddress,
+        "nodeId": this.nodeId,
+        "did": this.didString,
       }
     )
   }
 
   checkIsMine(){
     let bindingServer = this.feedService.getBindingServer();
-    if (bindingServer == null || bindingServer == undefined){
+    if (bindingServer === null || bindingServer === undefined) {
       return 1;
     }
     
-    let bindServerDid = bindingServer.did||'';
-    if (this.didString == bindServerDid)
+    let bindServerDid = bindingServer.did || '';
+    if (this.didString === bindServerDid)
       return 0;
 
     return 1;
