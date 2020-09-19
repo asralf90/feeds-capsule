@@ -74,6 +74,7 @@ export const fr = {
     "SigninPage":{
         "signIn":"Sign In to Feeds",
         "Pleasewait":"Please wait...",
+        "feeds": 'feeds',
         "des":"Where meaningful",
         "des1":"conversations happens",
     },
