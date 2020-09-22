@@ -46,7 +46,6 @@ export class PostdetailPage implements OnInit {
   public popover: any;
   
   public postStatus = 0;
-
   constructor(
     private popoverController:PopoverController,
     private acRoute: ActivatedRoute,
@@ -137,6 +136,10 @@ export class PostdetailPage implements OnInit {
       });
     });
     this.events.subscribe("feeds:updateTitle",()=>{
+      if(this.menuService.postDetail!=null){
+        this.menuService.hideActionSheet();
+        this.menuMore();
+      }
       this.initTitle();
     });
   

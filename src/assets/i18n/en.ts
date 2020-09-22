@@ -62,6 +62,9 @@ export const en = {
         "resolveDidDocumentError":"Resolve Did Document error",
         "cdeleted":"(comment deleted)",
         "sharepost":"Share Post",
+        "error400":"required parameter absence",
+        "error500":"Server error",
+        "confirmdeletion":"Confirm deletion?"
     },
     "app":{
         "profileDetails":"Profile Details",
@@ -70,6 +73,7 @@ export const en = {
         "donation":"Donation",
         "signout":"Sign out",
         "des":"Sign out successfully",
+        "des1":"Are you sure to sign out?"
     },
     "SigninPage":{
         "signIn":"Sign In to Feeds",
@@ -197,7 +201,8 @@ export const en = {
         "users":"Users",
         "currentFeedSources":"Current Feeds Sources",
         "addNewFeedSources":"Add a New Feeds Source",
-        "createNewFeedSource":"Create a New Feeds Source"
+        "createNewFeedSource":"Create a New Feeds Source",
+        "discover":"Discover"
     },
     "AddServerPage":{
         "scanorEnterManual":"Scan or Enter Manually",
@@ -239,6 +244,10 @@ export const en = {
         "removeserver": "Service removed",
         "feedsSourceQRCode":"Feeds Source QRCode",
         "error":"resolve diddocument error",
+        "public":"Public",
+        "publicTip":"Public successfully",
+        "unpublic":"Unpublic",
+        "unpublicTip":"UnPublic successfully",
     },
     "ScanqrcodePage":{
         "introtitle": "Create a new",
@@ -373,5 +382,11 @@ export const en = {
     "EditcommentPage":{
         "title":"Edit Comment",
         "savechanges":"Save changes"
+    },
+    "DiscoverfeedsPage":{
+        "title":"Discover Feeds Sources",
+        "added":"Added",
+        "notadded":"Not added",
+        "exploreFeeds":"Explore Feeds",
     }
 };

@@ -41,6 +41,8 @@ const routes: Routes = [
   { path: 'eidtchannel', loadChildren: './pages/eidtchannel/eidtchannel.module#EidtchannelPageModule' },
   { path: 'editpost', loadChildren: './pages/editpost/editpost.module#EditpostPageModule' },
   { path: 'editcomment', loadChildren: './pages/editcomment/editcomment.module#EditcommentPageModule' },
+  { path: 'discoverfeeds', loadChildren: './pages/servers/discoverfeeds/discoverfeeds.module#DiscoverfeedsPageModule' },
+  { path: 'discoverfeedsinfo', loadChildren: './pages/servers/discoverfeedsinfo/discoverfeedsinfo.module#DiscoverfeedsinfoPageModule' },
 
 
 ];
