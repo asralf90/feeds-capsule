@@ -143,10 +143,7 @@ export class HomePage implements OnInit {
   }
 
  ionViewWillLeave(){
-<<<<<<< HEAD
-=======
     this.events.unsubscribe("feeds:updateTitle");
->>>>>>> origin/dev
     this.events.unsubscribe("feeds:connectionChanged");
     this.events.unsubscribe("feeds:postDataUpdate");
     this.events.unsubscribe("feeds:friendConnectionChanged");
